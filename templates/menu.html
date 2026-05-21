@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="{{ lang }}">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+<meta name="theme-color" content="#0a0a0a" />
+<title>{{ seo.title }}</title>
+<meta name="description" content="{{ seo.description }}" />
+<meta name="keywords" content="{{ seo.keywords }}" />
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+<link rel="canonical" href="{{ canonical }}" />
+<link rel="alternate" hreflang="ru" href="{{ canonical }}?lang=ru" />
+<link rel="alternate" hreflang="uz" href="{{ canonical }}?lang=uz" />
+<link rel="alternate" hreflang="x-default" href="{{ canonical }}" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Vanilla Coffee" />
+<meta property="og:title" content="{{ seo.title }}" />
+<meta property="og:description" content="{{ seo.description }}" />
+<meta property="og:url" content="{{ canonical }}" />
+<meta property="og:image" content="{{ site_url }}{{ asset_url('img/og.svg') }}" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="{{ seo.title }}" />
+<meta name="twitter:description" content="{{ seo.description }}" />
+<meta name="twitter:image" content="{{ site_url }}{{ asset_url('img/og.svg') }}" />
+<link rel="manifest" href="{{ asset_url('manifest.json') }}" />
+<link rel="icon" type="image/png" href="{{ asset_url('img/favicon.png') }}" />
+<link rel="apple-touch-icon" href="{{ asset_url('img/apple-touch-icon.png') }}" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;500;600;700;800&family=Pacifico&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ asset_url('css/styles.css') }}" />
+<script type="application/ld+json">{{ jsonld|safe }}</script>
+</head>
+<body class="menu-page">
+<div class="bean-field" id="beanField"></div>
+
+<header class="menu-hero">
+  <nav class="menu-topbar">
+    <a href="{{ url_for('index', lang=lang) }}" class="menu-back">{{ t['menu.back_home'] }}</a>
+    <a href="{{ url_for('index', lang=lang) }}" class="nav-logo">
+      <img src="{{ asset_url('img/logo-full.png') }}" alt="Wanilla Coffee" class="brand-logo" width="1536" height="1024" />
+    </a>
+  </nav>
+
+  <div class="menu-hero-inner">
+    <span class="menu-kicker">{{ t['menu.kicker'] }}</span>
+    <h1>{{ t['menu.page_title'] }}</h1>
+    <p>{{ t['menu.page_sub'] }}</p>
+  </div>
+</header>
+
+<main class="menu-page-shell">
+  <section class="menu-category-grid">
+  {% for section in menu_sections %}
+  <a href="{{ url_for('menu_category_page', category_id=section.id, lang=lang) }}" class="menu-category-card">
+    <article class="menu-spotlight">
+      <div class="menu-spotlight-media">
+        <img src="{{ section.cover }}" alt="{{ section.name }}" loading="lazy" />
+      </div>
+      <div class="menu-spotlight-copy">
+        <span class="menu-spotlight-icon">{{ section.icon }}</span>
+        <h2>{{ section.name }}</h2>
+        <p>{{ section.items_count }} {{ t['menu.items_count'] }} · {{ section.min_price }} UZS</p>
+        <span class="menu-spotlight-cta">{{ t['menu.page_hint'] }}</span>
+      </div>
+    </article>
+  </a>
+  {% endfor %}
+  </section>
+</main>
+</body>
+</html>

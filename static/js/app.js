@@ -5,6 +5,16 @@
 const $  = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
 
+function parseJsonScript(id, fallback) {
+  const el = document.getElementById(id);
+  if (!el) return fallback;
+  try {
+    return JSON.parse(el.textContent);
+  } catch (_err) {
+    return fallback;
+  }
+}
+
 // ---------- State ----------
 const body = document.body;
 const state = {
@@ -83,17 +93,18 @@ const navLinks = $('#navLinks');
 const navToggle = $('#navToggle');
 
 window.addEventListener('scroll', () => {
-  nav.classList.toggle('scrolled', window.scrollY > 30);
+  if (nav) nav.classList.toggle('scrolled', window.scrollY > 30);
 }, { passive: true });
 
 navToggle?.addEventListener('click', () => {
+  if (!navLinks) return;
   navLinks.classList.toggle('open');
   navToggle.classList.toggle('open');
 });
 $$('#navLinks a').forEach((a) =>
   a.addEventListener('click', () => {
-    navLinks.classList.remove('open');
-    navToggle.classList.remove('open');
+    if (navLinks) navLinks.classList.remove('open');
+    if (navToggle) navToggle.classList.remove('open');
   })
 );
 
@@ -105,12 +116,13 @@ const revealObserver = new IntersectionObserver((entries) => {
       revealObserver.unobserve(e.target);
     }
   });
-}, { threshold: 0.12 });
+}, { threshold: 0, rootMargin: '0px 0px -10% 0px' });
 $$('.reveal').forEach((el) => revealObserver.observe(el));
 
 // ---------- Tabs ----------
 function renderTabs() {
   const tabsEl = $('#menuTabs');
+  if (!tabsEl) return;
   const all = [{ id: 'all', name: { ru: t('menu.all'), uz: t('menu.all') }, icon: '✨' }, ...state.categories];
   tabsEl.innerHTML = all.map((c) => `
     <button class="menu-tab ${c.id === state.cat ? 'active' : ''}" data-cat="${c.id}">
@@ -129,6 +141,7 @@ function renderTabs() {
 function renderMenu() {
   const gridEl = $('#menuGrid');
   const emptyEl = $('#menuEmpty');
+  if (!gridEl || !emptyEl) return;
   const term = state.search.trim().toLowerCase();
   const items = state.products.filter((p) => {
     const okCat = state.cat === 'all' || p.category_id === state.cat;
@@ -200,7 +213,7 @@ function renderMenu() {
 }
 
 // ---------- Search ----------
-$('#menuSearch').addEventListener('input', (e) => {
+$('#menuSearch')?.addEventListener('input', (e) => {
   state.search = e.target.value;
   renderMenu();
 });
@@ -244,12 +257,12 @@ function showProduct(p) {
 
   productModal.classList.add('show');
 }
-$('#productClose').addEventListener('click', () => productModal.classList.remove('show'));
-productModal.addEventListener('click', (e) => { if (e.target === productModal) productModal.classList.remove('show'); });
-$('#pmAdd').addEventListener('click', () => {
+$('#productClose')?.addEventListener('click', () => productModal?.classList.remove('show'));
+productModal?.addEventListener('click', (e) => { if (e.target === productModal) productModal.classList.remove('show'); });
+$('#pmAdd')?.addEventListener('click', () => {
   if (!state.current || !state.currentSize) return;
   addToCart(state.current, state.currentSize.label, state.currentSize.price);
-  productModal.classList.remove('show');
+  productModal?.classList.remove('show');
 });
 
 // ---------- Cart ----------
@@ -265,9 +278,11 @@ const cartNoteEl   = $('#cartNote');
 
 function openCart()  { cartDrawer.classList.add('open'); cartBackdrop.classList.add('open'); }
 function closeCart() { cartDrawer.classList.remove('open'); cartBackdrop.classList.remove('open'); }
-cartBtn.addEventListener('click', openCart);
-$('#cartClose').addEventListener('click', closeCart);
-cartBackdrop.addEventListener('click', closeCart);
+if (cartBtn && cartDrawer && cartBackdrop) {
+  cartBtn.addEventListener('click', openCart);
+  $('#cartClose')?.addEventListener('click', closeCart);
+  cartBackdrop.addEventListener('click', closeCart);
+}
 
 function addToCart(product, size, price) {
   const key = `${product.id}|${size}`;
@@ -290,6 +305,7 @@ function changeQty(key, delta) {
 }
 
 function renderCart() {
+  if (!cartCountEl || !cartTotalEl || !checkoutBtn || !cartBody || !cartEmpty) return;
   const count = state.cart.reduce((a, b) => a + b.qty, 0);
   const total = state.cart.reduce((a, b) => a + b.price * b.qty, 0);
 
@@ -332,7 +348,7 @@ function renderCart() {
 }
 
 // ---------- Checkout ----------
-checkoutBtn.addEventListener('click', async () => {
+checkoutBtn?.addEventListener('click', async () => {
   if (!state.cart.length) return;
   checkoutBtn.disabled = true;
   const original = checkoutBtn.textContent;
@@ -381,8 +397,9 @@ checkoutBtn.addEventListener('click', async () => {
 
 // ---------- Order modal ----------
 const orderModal = $('#orderModal');
-$('#modalClose').addEventListener('click', () => orderModal.classList.remove('show'));
+$('#modalClose')?.addEventListener('click', () => orderModal?.classList.remove('show'));
 function showOrderModal(id, eta) {
+  if (!orderModal) return;
   $('#orderId').textContent = '#' + id;
   $('#orderEtaText').innerHTML = t('ord.eta', { eta: `<strong>${eta}</strong>` });
   orderModal.classList.add('show');
@@ -392,6 +409,7 @@ function showOrderModal(id, eta) {
 const toastEl = $('#toast');
 let toastTimer;
 function toast(msg) {
+  if (!toastEl) return;
   toastEl.textContent = msg;
   toastEl.classList.add('show');
   clearTimeout(toastTimer);
@@ -429,13 +447,13 @@ function toast(msg) {
 function switchLanguage(lang) {
   if (lang === state.lang || !['ru', 'uz'].includes(lang)) return;
   const overlay = $('#langOverlay');
-  overlay.classList.add('show');
+  overlay?.classList.add('show');
 
   setTimeout(() => {
     state.lang = lang;
     body.dataset.lang = lang;
     // notify server (optional, also persisted in session for next page load)
-    fetch('/?lang=' + lang).catch(() => {});
+    fetch(window.location.pathname + '?lang=' + lang).catch(() => {});
 
     applyI18n();
     renderTabs();
@@ -445,7 +463,7 @@ function switchLanguage(lang) {
     // close dropdown
     $('#langSwitch')?.classList.remove('open');
 
-    setTimeout(() => overlay.classList.remove('show'), 280);
+    setTimeout(() => overlay?.classList.remove('show'), 280);
   }, 350);
 }
 
@@ -453,6 +471,17 @@ function switchLanguage(lang) {
 // BOOTSTRAP — load i18n + menu, then render
 // ============================================
 (async function boot() {
+  const initialI18n = parseJsonScript('initialI18nData', {});
+  const initialMenu = parseJsonScript('initialMenuData', { categories: [], products: [] });
+
+  state.i18n = initialI18n;
+  state.categories = initialMenu.categories || [];
+  state.products = initialMenu.products || [];
+  applyI18n();
+  renderTabs();
+  renderMenu();
+  renderCart();
+
   try {
     const [i18nRes, menuRes] = await Promise.all([
       fetch('/api/i18n').then((r) => r.json()),

@@ -69,30 +69,12 @@ input, select, textarea { font-family: inherit; }
   gap: 0.7rem;
   padding: 0.3rem 0.5rem;
 }
-.adm-logo {
-  display: grid; place-items: center;
-  width: 38px; height: 38px;
-  background: var(--gradient);
-  border-radius: 12px;
-  font-family: 'Pacifico', cursive;
-  font-size: 1.3rem;
-  color: #fff;
-  box-shadow: 0 6px 20px var(--accent-glow);
-}
-.adm-logo.big { width: 56px; height: 56px; font-size: 2rem; border-radius: 18px; }
-.adm-name {
-  font-family: 'Pacifico', cursive;
-  font-size: 1.3rem;
-  color: var(--accent);
-  line-height: 1;
-}
-.adm-name small {
+.adm-brand-logo {
   display: block;
-  font-family: 'Inter', sans-serif;
-  font-size: 0.55rem;
-  letter-spacing: 0.32em;
-  color: var(--text);
-  margin-top: 2px;
+  width: 156px;
+  max-width: 100%;
+  height: auto;
+  filter: drop-shadow(0 8px 18px rgba(255, 109, 0, 0.22));
 }
 
 .adm-nav {
@@ -743,19 +725,30 @@ input, select, textarea { font-family: inherit; }
   gap: 0.8rem;
   margin-bottom: 1.5rem;
 }
+.adm-login-mark {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  border-radius: 16px;
+  box-shadow: 0 12px 28px rgba(255, 109, 0, 0.18);
+}
+.adm-login-logo {
+  display: block;
+  width: 220px;
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 0.25rem;
+}
 .login-title {
-  font-family: 'Pacifico', cursive;
-  font-size: 1.6rem;
-  color: var(--accent);
   line-height: 1;
   text-align: left;
 }
 .login-title small {
   display: block;
   font-family: 'Inter', sans-serif;
-  font-size: 0.6rem;
+  font-size: 0.72rem;
   letter-spacing: 0.32em;
-  color: var(--text);
+  color: var(--accent-2);
   margin-top: 4px;
 }
 
@@ -841,6 +834,7 @@ input, select, textarea { font-family: inherit; }
     overflow-x: auto;
   }
   .adm-brand { margin-right: auto; }
+  .adm-brand-logo { width: 128px; }
   .adm-nav { flex-direction: row; gap: 0.3rem; }
   .adm-nav a { padding: 0.5rem 0.7rem; font-size: 0.82rem; }
   .adm-nav a span, .adm-nav a:not(.adm-extlink) { /* keep text */ }
@@ -848,6 +842,8 @@ input, select, textarea { font-family: inherit; }
   .adm-logout { padding: 0.5rem 0.7rem; font-size: 0.82rem; }
   .adm-main { padding: 1.5rem 1.2rem 3rem; }
   .adm-top h1 { font-size: 1.5rem; }
+  .adm-login-logo { width: 180px; }
+  .adm-login-mark { width: 52px; height: 52px; }
   .pf-grid { grid-template-columns: 1fr; }
   .pf-image { position: relative; top: 0; }
   .form-row.two { grid-template-columns: 1fr; }

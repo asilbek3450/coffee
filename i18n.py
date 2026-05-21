@@ -72,6 +72,14 @@ I18N = {
     "menu.size":     {"ru": "Размер", "uz": "Hajmi"},
     "menu.price":    {"ru": "Цена",   "uz": "Narxi"},
     "menu.close":    {"ru": "Закрыть","uz": "Yopish"},
+    "menu.page_title": {"ru": "Полное меню", "uz": "To'liq menyu"},
+    "menu.page_sub": {
+        "ru": "Большие категории с аппетитными фото. Нажмите на категорию и посмотрите все позиции внутри.",
+        "uz": "Katta kategoriyalar va ishtaha ochadigan rasmlar. Kategoriya ustiga bosib, ichidagi barcha mahsulotlarni ko'ring.",
+    },
+    "menu.page_hint": {"ru": "Нажмите, чтобы открыть", "uz": "Ochish uchun bosing"},
+    "menu.back_home": {"ru": "На главную", "uz": "Bosh sahifaga"},
+    "menu.items_count": {"ru": "позиций", "uz": "ta mahsulot"},
 
     # Gallery
     "gal.kicker":    {"ru": "Атмосфера", "uz": "Atmosfera"},

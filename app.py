@@ -59,6 +59,20 @@ app.config.update(
 )
 
 
+@app.context_processor
+def inject_asset_url():
+    def asset_url(filename):
+        file_path = os.path.join(app.static_folder, filename)
+        version = None
+        try:
+            version = int(os.path.getmtime(file_path))
+        except OSError:
+            version = None
+        return url_for("static", filename=filename, v=version)
+
+    return {"asset_url": asset_url}
+
+
 # ---------- BOOTSTRAP: ensure DB exists & seeded ----------
 def _bootstrap_db():
     db.init_db()
@@ -179,7 +193,7 @@ def build_jsonld(lang):
         "name": "Vanilla Coffee",
         "description": SEO[lang]["description"],
         "url": SITE_URL,
-        "logo": f"{SITE_URL}/static/img/favicon.svg",
+        "logo": f"{SITE_URL}/static/img/logo-mark.png",
         "image": f"{SITE_URL}/static/img/og.svg",
         "telephone": "+998 90 123 45 67",
         "priceRange": "$$",
@@ -213,6 +227,46 @@ def build_jsonld(lang):
     return cafe
 
 
+def build_menu_sections(lang):
+    categories = db.all_categories()
+    products = db.all_products()
+    grouped = []
+
+    for category in categories:
+        items = [p for p in products if p["category_id"] == category["id"]]
+        if not items:
+            continue
+
+        min_price = min(
+            size["price"]
+            for item in items
+            for size in item.get("sizes", [])
+        )
+
+        grouped.append({
+            "id": category["id"],
+            "name": category["name"].get(lang, category["name"]["ru"]),
+            "icon": category.get("icon", ""),
+            "cover": items[0].get("img") or "/static/img/og.svg",
+            "items_count": len(items),
+            "min_price": min_price,
+            "products": items,
+        })
+
+    return grouped
+
+
+def build_menu_section_by_id(lang, category_id):
+    for section in build_menu_sections(lang):
+        if section["id"] == category_id:
+            return section
+    return None
+
+
+def build_i18n_payload():
+    return {k: {"ru": v.get("ru", ""), "uz": v.get("uz", "")} for k, v in I18N.items()}
+
+
 # ---------- PUBLIC ROUTES ----------
 @app.route("/")
 def index():
@@ -232,6 +286,11 @@ def index():
         jsonld=json.dumps(build_jsonld(lang), ensure_ascii=False),
         categories=db.all_categories(),
         products=db.all_products(),
+        initial_i18n=json.dumps(build_i18n_payload(), ensure_ascii=False),
+        initial_menu=json.dumps({
+            "categories": db.all_categories(),
+            "products": db.all_products(),
+        }, ensure_ascii=False),
         canonical=f"{SITE_URL}/",
     )
 
@@ -252,7 +311,58 @@ def table_view(table_id):
         jsonld=json.dumps(build_jsonld(lang), ensure_ascii=False),
         categories=db.all_categories(),
         products=db.all_products(),
+        initial_i18n=json.dumps(build_i18n_payload(), ensure_ascii=False),
+        initial_menu=json.dumps({
+            "categories": db.all_categories(),
+            "products": db.all_products(),
+        }, ensure_ascii=False),
         canonical=f"{SITE_URL}/table/{table_id}",
+    )
+
+
+@app.route("/menu")
+def menu_page():
+    lang = current_lang()
+    session["lang"] = lang
+    return render_template(
+        "menu.html",
+        table=session.get("table"),
+        lang=lang,
+        t=dict_for(lang),
+        supported_langs=SUPPORTED_LANGS,
+        site_url=SITE_URL,
+        seo={
+            **build_seo(lang),
+            "title": "Vanilla Coffee Menyusi" if lang == "uz" else "Меню Vanilla Coffee",
+        },
+        jsonld=json.dumps(build_jsonld(lang), ensure_ascii=False),
+        canonical=f"{SITE_URL}/menu",
+        menu_sections=build_menu_sections(lang),
+    )
+
+
+@app.route("/menu/category/<category_id>")
+def menu_category_page(category_id):
+    lang = current_lang()
+    session["lang"] = lang
+    section = build_menu_section_by_id(lang, category_id)
+    if not section:
+        return not_found(None)
+
+    return render_template(
+        "menu_category.html",
+        table=session.get("table"),
+        lang=lang,
+        t=dict_for(lang),
+        supported_langs=SUPPORTED_LANGS,
+        site_url=SITE_URL,
+        seo={
+            **build_seo(lang),
+            "title": f"{section['name']} | Vanilla Coffee",
+        },
+        jsonld=json.dumps(build_jsonld(lang), ensure_ascii=False),
+        canonical=f"{SITE_URL}/menu/category/{category_id}",
+        section=section,
     )
 
 
@@ -275,8 +385,7 @@ def api_product(pid):
 
 @app.route("/api/i18n")
 def api_i18n():
-    flat = {k: {"ru": v.get("ru", ""), "uz": v.get("uz", "")} for k, v in I18N.items()}
-    return jsonify(flat)
+    return jsonify(build_i18n_payload())
 
 
 @app.route("/api/order", methods=["POST"])
@@ -355,6 +464,9 @@ def sitemap():
         })
 
     add(f"{SITE_URL}/")
+    add(f"{SITE_URL}/menu")
+    for category in db.all_categories():
+        add(f"{SITE_URL}/menu/category/{category['id']}")
     # Include a handful of table pages (extend as needed)
     for n in range(1, 21):
         add(f"{SITE_URL}/table/{n}")
@@ -628,6 +740,11 @@ def not_found(_e):
         jsonld=json.dumps(build_jsonld(lang), ensure_ascii=False),
         categories=db.all_categories(),
         products=db.all_products(),
+        initial_i18n=json.dumps(build_i18n_payload(), ensure_ascii=False),
+        initial_menu=json.dumps({
+            "categories": db.all_categories(),
+            "products": db.all_products(),
+        }, ensure_ascii=False),
         canonical=f"{SITE_URL}/",
     ), 404
 

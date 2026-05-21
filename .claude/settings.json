@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(\"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome\" --headless --disable-gpu --window-size=1400,900 --screenshot=/tmp/coffee_wait.png --virtual-time-budget=30000 http://localhost:5050/)",
+      "Bash(pkill -f \"python3.*app.py\")",
+      "Bash(pkill -f \"Google Chrome.*headless\")"
+    ]
+  }
+}

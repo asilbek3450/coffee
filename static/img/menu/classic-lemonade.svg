@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 620">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1f2b16"/>
+      <stop offset="1" stop-color="#d9b12e"/>
+    </linearGradient>
+  </defs>
+  <rect width="900" height="620" fill="url(#bg)"/>
+  <rect x="338" y="124" width="218" height="344" rx="38" fill="#f4fbef" opacity=".95"/>
+  <rect x="360" y="186" width="174" height="240" rx="24" fill="#f4d255"/>
+  <g fill="#f6efaf">
+    <circle cx="418" cy="278" r="23"/>
+    <circle cx="476" cy="336" r="24"/>
+  </g>
+  <path d="M402 262c20-18 43-16 59 5" stroke="#ffffff" stroke-width="9" stroke-linecap="round"/>
+  <path d="M440 72v100" stroke="#fff8e6" stroke-width="14" stroke-linecap="round"/>
+  <text x="70" y="540" fill="#fffbe9" font-family="Georgia, serif" font-size="72">Classic Lemonade</text>
+</svg>

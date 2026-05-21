@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 620">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#19252b"/>
+      <stop offset="1" stop-color="#f39a36"/>
+    </linearGradient>
+  </defs>
+  <rect width="900" height="620" fill="url(#bg)"/>
+  <rect x="334" y="126" width="222" height="340" rx="34" fill="#eef7fb" opacity=".95"/>
+  <rect x="356" y="193" width="178" height="229" rx="20" fill="#d89f43"/>
+  <rect x="356" y="170" width="178" height="82" rx="18" fill="#2f241f"/>
+  <g fill="#f9f9f7" opacity=".8">
+    <circle cx="405" cy="287" r="18"/>
+    <circle cx="458" cy="332" r="20"/>
+    <circle cx="493" cy="277" r="16"/>
+  </g>
+  <path d="M265 420c84-28 142-18 182 26" stroke="#ffdd7c" stroke-width="18" stroke-linecap="round"/>
+  <text x="70" y="540" fill="#fff4e7" font-family="Georgia, serif" font-size="72">Espresso Tonic</text>
+</svg>

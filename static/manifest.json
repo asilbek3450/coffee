@@ -7,15 +7,15 @@
   "theme_color": "#0a0a0a",
   "icons": [
     {
-      "src": "/static/img/favicon.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
+      "src": "/static/img/favicon.png",
+      "sizes": "64x64",
+      "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/static/img/apple-touch-icon.svg",
+      "src": "/static/img/apple-touch-icon.png",
       "sizes": "180x180",
-      "type": "image/svg+xml",
+      "type": "image/png",
       "purpose": "any"
     }
   ]

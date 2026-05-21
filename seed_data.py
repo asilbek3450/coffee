@@ -77,7 +77,7 @@ PRODUCTS = [
         "desc_uz": "Espresso, sut va tabiiy shokolad",
         "ingredients_ru": ["Эспрессо", "Молоко", "Шоколадный сироп", "Какао пудра"],
         "ingredients_uz": ["Espresso", "Sut", "Shokolad siropi", "Kakao kukuni"],
-        "img": "https://images.unsplash.com/photo-1578314675229-50a503353a55?w=600&q=80",
+        "img": "/static/img/menu/mocha.svg",
         "sizes": [ml(250, 32000), ml(350, 35000)],
     },
     {
@@ -151,7 +151,7 @@ PRODUCTS = [
         "desc_uz": "Sut va muz bilan salqin latte",
         "ingredients_ru": ["Эспрессо", "Холодное молоко", "Лёд"],
         "ingredients_uz": ["Espresso", "Sovuq sut", "Muz"],
-        "img": "https://images.unsplash.com/photo-1517663154410-2f15a5e1e1ad?w=600&q=80",
+        "img": "/static/img/menu/ice-latte.svg",
         "sizes": [ml(450, 35000), ml(600, 40000)],
     },
     {
@@ -172,7 +172,7 @@ PRODUCTS = [
         "ingredients_ru": ["Эспрессо", "Молоко", "Лёд", "Сироп", "Взбитые сливки"],
         "ingredients_uz": ["Espresso", "Sut", "Muz", "Sirop", "Ko‘pirtirilgan qaymoq"],
         "tag_ru": "Хит", "tag_uz": "Hit",
-        "img": "https://images.unsplash.com/photo-1572286258217-215cf8e9d99f?w=600&q=80",
+        "img": "/static/img/menu/frappuccino.svg",
         "sizes": [ml(450, 40000), ml(600, 45000)],
     },
     {
@@ -203,7 +203,7 @@ PRODUCTS = [
         "desc_uz": "Espresso tonik bilan — yangicha taravat",
         "ingredients_ru": ["Эспрессо", "Тоник", "Лёд", "Лайм"],
         "ingredients_uz": ["Espresso", "Tonik", "Muz", "Layim"],
-        "img": "https://images.unsplash.com/photo-1606791422814-b32c705fa101?w=600&q=80",
+        "img": "/static/img/menu/espresso-tonic.svg",
         "sizes": [ml(450, 35000), ml(600, 40000)],
     },
     {
@@ -256,7 +256,7 @@ PRODUCTS = [
         "desc_uz": "O‘rmon mevalari aralashmasi bilan xushbo‘y choy",
         "ingredients_ru": ["Чай", "Малина", "Клубника", "Черника", "Мёд"],
         "ingredients_uz": ["Choy", "Malina", "Qulupnay", "Qora rezavor", "Asal"],
-        "img": "https://images.unsplash.com/photo-1597481499845-bf2a4cf86c8b?w=600&q=80",
+        "img": "/static/img/menu/berry-tea.svg",
         "sizes": [ml(450, 30000), ml(600, 35000)],
     },
     {
@@ -266,7 +266,7 @@ PRODUCTS = [
         "desc_uz": "Fasl mevalari bo‘laklari bilan tetiklantiruvchi choy",
         "ingredients_ru": ["Чай", "Апельсин", "Яблоко", "Лимон", "Мята"],
         "ingredients_uz": ["Choy", "Apelsin", "Olma", "Limon", "Yalpiz"],
-        "img": "https://images.unsplash.com/photo-1568288310-69ce2dbac6ae?w=600&q=80",
+        "img": "/static/img/menu/fruit-tea.svg",
         "sizes": [ml(450, 37000), ml(600, 42000)],
     },
     {
@@ -298,7 +298,7 @@ PRODUCTS = [
         "desc_uz": "Limon va yalpiz bilan yangi limonad",
         "ingredients_ru": ["Лимон", "Сахар", "Мята", "Газированная вода", "Лёд"],
         "ingredients_uz": ["Limon", "Shakar", "Yalpiz", "Gazlangan suv", "Muz"],
-        "img": "https://images.unsplash.com/photo-1523371683702-1aaa1e74c95f?w=600&q=80",
+        "img": "/static/img/menu/classic-lemonade.svg",
         "sizes": [ml(450, 30000)],
     },
     {
@@ -318,7 +318,7 @@ PRODUCTS = [
         "desc_uz": "Muz bilan sovuq mevali choy",
         "ingredients_ru": ["Чай", "Персик", "Лимон", "Лёд", "Сахар"],
         "ingredients_uz": ["Choy", "Shaftoli", "Limon", "Muz", "Shakar"],
-        "img": "https://images.unsplash.com/photo-1556679343-c1c1c9308e4e?w=600&q=80",
+        "img": "/static/img/menu/fruit-iced-tea.svg",
         "sizes": [ml(450, 35000)],
     },
     {
@@ -435,7 +435,7 @@ PRODUCTS = [
         "desc_uz": "Shirin sabzi freshi — teri uchun vitamin",
         "ingredients_ru": ["100% свежая морковь"],
         "ingredients_uz": ["100% yangi sabzi"],
-        "img": "https://images.unsplash.com/photo-1597740049799-5ba6f1f49531?w=600&q=80",
+        "img": "/static/img/menu/carrot-fresh.svg",
         "sizes": [ml(450, 30000), ml(600, 45000)],
     },
     {
@@ -446,7 +446,7 @@ PRODUCTS = [
         "ingredients_ru": ["100% свежий апельсин"],
         "ingredients_uz": ["100% yangi apelsin"],
         "tag_ru": "Vitamin C", "tag_uz": "Vitamin C",
-        "img": "https://images.unsplash.com/photo-1600271886742-f049cd451bba?w=600&q=80",
+        "img": "/static/img/menu/orange-fresh.svg",
         "sizes": [ml(450, 65000), ml(600, 80000)],
     },
     {
@@ -456,7 +456,7 @@ PRODUCTS = [
         "desc_uz": "Apelsin va sabzi miksi",
         "ingredients_ru": ["Апельсин", "Морковь"],
         "ingredients_uz": ["Apelsin", "Sabzi"],
-        "img": "https://images.unsplash.com/photo-1622597467836-f3e6707e1191?w=600&q=80",
+        "img": "/static/img/menu/orange-carrot-fresh.svg",
         "sizes": [ml(450, 50000), ml(600, 75000)],
     },
     {
@@ -466,7 +466,7 @@ PRODUCTS = [
         "desc_uz": "Yengil va muvozanatli miks",
         "ingredients_ru": ["Яблоко", "Морковь"],
         "ingredients_uz": ["Olma", "Sabzi"],
-        "img": "https://images.unsplash.com/photo-1622597467836-f3e6707e1191?w=600&q=80",
+        "img": "/static/img/menu/apple-carrot-fresh.svg",
         "sizes": [ml(450, 45000), ml(600, 55000)],
     },
     {
@@ -476,7 +476,7 @@ PRODUCTS = [
         "desc_uz": "Tetiklantiruvchi sitrus miksi",
         "ingredients_ru": ["Яблоко", "Апельсин"],
         "ingredients_uz": ["Olma", "Apelsin"],
-        "img": "https://images.unsplash.com/photo-1622597467836-f3e6707e1191?w=600&q=80",
+        "img": "/static/img/menu/apple-orange-fresh.svg",
         "sizes": [ml(450, 60000), ml(600, 75000)],
     },
     {
@@ -487,7 +487,7 @@ PRODUCTS = [
         "ingredients_ru": ["Яблоко", "Морковь", "Апельсин"],
         "ingredients_uz": ["Olma", "Sabzi", "Apelsin"],
         "tag_ru": "Mix", "tag_uz": "Miks",
-        "img": "https://images.unsplash.com/photo-1622597467836-f3e6707e1191?w=600&q=80",
+        "img": "/static/img/menu/fresh-mix.svg",
         "sizes": [ml(450, 55000), ml(600, 75000)],
     },
 

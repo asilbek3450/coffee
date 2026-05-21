@@ -4,18 +4,19 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>{% block title %}Vanilla Coffee — Admin{% endblock %}</title>
+<link rel="icon" type="image/png" href="{{ asset_url('img/favicon.png') }}" />
+<link rel="apple-touch-icon" href="{{ asset_url('img/apple-touch-icon.png') }}" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;500;600;700;800&family=Pacifico&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}" />
+<link rel="stylesheet" href="{{ asset_url('css/admin.css') }}" />
 </head>
 <body>
 {% block body %}
 <div class="adm-shell">
   <aside class="adm-side">
     <a href="{{ url_for('admin_dashboard') }}" class="adm-brand">
-      <span class="adm-logo">V</span>
-      <span class="adm-name">Vanilla<small>ADMIN</small></span>
+      <img src="{{ asset_url('img/logo-full.png') }}" alt="Wanilla Coffee Admin" class="adm-brand-logo" width="1536" height="1024" />
     </a>
     <nav class="adm-nav">
       <a href="{{ url_for('admin_dashboard') }}" class="{{ 'active' if request.endpoint == 'admin_dashboard' }}">

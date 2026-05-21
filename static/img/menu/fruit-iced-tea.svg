@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 620">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2b2037"/>
+      <stop offset="1" stop-color="#da8844"/>
+    </linearGradient>
+  </defs>
+  <rect width="900" height="620" fill="url(#bg)"/>
+  <rect x="334" y="124" width="222" height="344" rx="38" fill="#f3f7fb" opacity=".95"/>
+  <rect x="356" y="186" width="178" height="240" rx="24" fill="#cf7431"/>
+  <g fill="#dff3ff" opacity=".85">
+    <rect x="389" y="252" width="44" height="44" rx="10"/>
+    <rect x="455" y="302" width="44" height="44" rx="10"/>
+  </g>
+  <circle cx="490" cy="244" r="20" fill="#f6c15a"/>
+  <circle cx="420" cy="335" r="22" fill="#df5e5e"/>
+  <path d="M440 72v100" stroke="#fff7ec" stroke-width="14" stroke-linecap="round"/>
+  <text x="70" y="540" fill="#fff3e8" font-family="Georgia, serif" font-size="72">Fruit Iced Tea</text>
+</svg>

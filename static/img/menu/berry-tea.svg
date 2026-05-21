@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 620">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2e1122"/>
+      <stop offset="1" stop-color="#8c2448"/>
+    </linearGradient>
+  </defs>
+  <rect width="900" height="620" fill="url(#bg)"/>
+  <path d="M310 178h280l-22 226a52 52 0 0 1-52 47H384a52 52 0 0 1-52-47z" fill="#efe2d2"/>
+  <rect x="338" y="216" width="224" height="162" rx="24" fill="#b73c63"/>
+  <path d="M610 236h42a46 46 0 0 1 0 92h-42" fill="none" stroke="#efe2d2" stroke-width="18"/>
+  <g fill="#f4aac0">
+    <circle cx="400" cy="294" r="20"/>
+    <circle cx="460" cy="265" r="18"/>
+    <circle cx="505" cy="314" r="22"/>
+  </g>
+  <text x="70" y="540" fill="#fff0f4" font-family="Georgia, serif" font-size="82">Berry Tea</text>
+</svg>

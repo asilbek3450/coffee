@@ -17,18 +17,18 @@
 <meta property="og:title" content="{{ seo.title }}" />
 <meta property="og:description" content="{{ seo.description }}" />
 <meta property="og:url" content="{{ canonical }}" />
-<meta property="og:image" content="{{ site_url }}/static/img/og.svg" />
+<meta property="og:image" content="{{ site_url }}{{ asset_url('img/og.svg') }}" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="{{ seo.title }}" />
 <meta name="twitter:description" content="{{ seo.description }}" />
-<meta name="twitter:image" content="{{ site_url }}/static/img/og.svg" />
-<link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}" />
-<link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='img/favicon.svg') }}" />
-<link rel="apple-touch-icon" href="{{ url_for('static', filename='img/apple-touch-icon.svg') }}" />
+<meta name="twitter:image" content="{{ site_url }}{{ asset_url('img/og.svg') }}" />
+<link rel="manifest" href="{{ asset_url('manifest.json') }}" />
+<link rel="icon" type="image/png" href="{{ asset_url('img/favicon.png') }}" />
+<link rel="apple-touch-icon" href="{{ asset_url('img/apple-touch-icon.png') }}" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Inter:wght@300;400;500;600;700;800&family=Pacifico&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}" />
+<link rel="stylesheet" href="{{ asset_url('css/styles.css') }}" />
 <script type="application/ld+json">{{ jsonld|safe }}</script>
 </head>
 <body data-table="{{ table or '' }}" data-lang="{{ lang }}">
@@ -71,14 +71,13 @@
 <!-- Navigation -->
 <nav class="nav" id="nav">
   <a href="#home" class="nav-logo">
-    <span class="logo-mark">V</span>
-    <span class="logo-text">Vanilla<small>COFFEE</small></span>
+    <img src="{{ asset_url('img/logo-full.png') }}" alt="Wanilla Coffee" class="brand-logo" width="1536" height="1024" />
   </a>
 
   <div class="nav-links" id="navLinks">
     <a href="#home"    data-i18n="nav.home">{{ t['nav.home'] }}</a>
     <a href="#about"   data-i18n="nav.about">{{ t['nav.about'] }}</a>
-    <a href="#menu"    data-i18n="nav.menu">{{ t['nav.menu'] }}</a>
+    <a href="{{ url_for('menu_page', lang=lang) }}" data-i18n="nav.menu">{{ t['nav.menu'] }}</a>
     <a href="#gallery" data-i18n="nav.gallery">{{ t['nav.gallery'] }}</a>
     <a href="#contact" data-i18n="nav.contact">{{ t['nav.contact'] }}</a>
   </div>
@@ -225,8 +224,47 @@
     <input type="search" id="menuSearch" data-i18n-attr="placeholder|menu.search" placeholder="{{ t['menu.search'] }}" />
   </div>
 
-  <div class="menu-tabs" id="menuTabs"></div>
-  <div class="menu-grid" id="menuGrid"></div>
+  <div class="menu-tabs" id="menuTabs">
+    <button class="menu-tab active" data-cat="all">
+      <span class="tab-icon">✨</span>{{ t['menu.all'] }}
+    </button>
+    {% for category in categories %}
+    <button class="menu-tab" data-cat="{{ category.id }}">
+      <span class="tab-icon">{{ category.icon or '' }}</span>{{ category.name[lang] }}
+    </button>
+    {% endfor %}
+  </div>
+  <div class="menu-grid" id="menuGrid">
+    {% for product in products %}
+    <article class="menu-card" data-id="{{ product.id }}">
+      {% if product.tag[lang] %}
+      <span class="menu-card-badge">{{ product.tag[lang] }}</span>
+      {% endif %}
+      <div class="menu-card-image">
+        <img src="{{ product.img }}" alt="{{ product.name[lang] }}" loading="lazy" />
+        <button class="menu-card-eye" aria-label="{{ t['menu.details'] }}">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+        </button>
+      </div>
+      <div class="menu-card-body">
+        <h3 class="menu-card-name">{{ product.name[lang] }}</h3>
+        <p class="menu-card-desc">{{ product.desc[lang] }}</p>
+        <div class="menu-prices">
+          {% for size in product.sizes %}
+          <button class="price-pill {% if loop.first %}active{% endif %}" data-size="{{ size.label }}" data-price="{{ size.price }}">
+            <span class="size">{{ size.label }}{% if size.kind == 'ml' %} {{ t['curr.ml'] }}{% endif %}</span>
+            <span class="amount">{{ ((size.price / 1000) | int) }}k</span>
+          </button>
+          {% endfor %}
+        </div>
+        <div class="menu-card-foot">
+          <span class="selected-price">{{ "{:,}".format(product.sizes[0].price).replace(",", " ") }} {{ t['curr.sum'] }}</span>
+          <button class="add-btn" aria-label="{{ t['menu.add'] }}">+</button>
+        </div>
+      </div>
+    </article>
+    {% endfor %}
+  </div>
   <div class="menu-empty" id="menuEmpty" hidden>
     <p data-i18n="menu.empty">{{ t['menu.empty'] }}</p>
   </div>
@@ -281,8 +319,7 @@
 <footer class="footer">
   <div class="footer-inner">
     <div class="footer-brand">
-      <span class="logo-mark big">V</span>
-      <span class="logo-text big">Vanilla<small>COFFEE</small></span>
+      <img src="{{ asset_url('img/logo-full.png') }}" alt="Wanilla Coffee" class="brand-logo brand-logo-footer" width="1536" height="1024" />
     </div>
     <p class="footer-tag" data-i18n="ftr.tag">{{ t['ftr.tag'] }}</p>
     <div class="footer-social">
@@ -365,6 +402,8 @@
 <!-- Toast -->
 <div class="toast" id="toast"></div>
 
-<script src="{{ url_for('static', filename='js/app.js') }}"></script>
+<script id="initialI18nData" type="application/json">{{ initial_i18n|safe }}</script>
+<script id="initialMenuData" type="application/json">{{ initial_menu|safe }}</script>
+<script src="{{ asset_url('js/app.js') }}"></script>
 </body>
 </html>
