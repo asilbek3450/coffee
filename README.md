@@ -88,4 +88,44 @@ to apply.
 - SQLite via standard `sqlite3` (no ORM, no external DB)
 - Vanilla JS / CSS — no build step, no framework
 - Google Fonts (Inter, Playfair Display, Pacifico)
+
+## Railway Deploy (Production)
+
+1. Push repo to GitHub.
+2. In Railway, create new project from this repo.
+3. Add a Volume and mount it to `/data`.
+4. Set Railway Variables:
+   - `SECRET_KEY` = long random string
+   - `ADMIN_USERNAME` = admin login
+   - `ADMIN_PASSWORD` = admin password
+   - `SITE_URL` = your final public Railway URL or custom domain
+   - `DATA_DIR` = `/data`
+5. Deploy. Healthcheck endpoint: `/healthz`
+
+Project already includes:
+- `Procfile`
+- `railway.json`
+- `runtime.txt`
+- production `gunicorn` command
+- `.env.example`
+
+## SEO + Google Indexing Checklist
+
+Implemented in this project:
+- `robots.txt` route with sitemap link
+- `sitemap.xml` route with `hreflang` alternates (`ru`, `uz`, `x-default`)
+- Canonical + OpenGraph + Twitter meta tags
+- JSON-LD `CafeOrCoffeeShop` + menu schema
+- `noscript` menu fallback for crawlers
+- `manifest.json` + favicon + apple touch icon
+
+After deploy:
+1. Open Google Search Console and add your domain property.
+2. Submit sitemap: `https://<your-domain>/sitemap.xml`.
+3. Use URL Inspection for:
+   - `/`
+   - `/table/1`
+   - `/table/2`
+4. Request indexing for main URLs.
+5. Keep `SITE_URL` exactly matching your canonical domain (no mix of old/new domains).
 # coffee

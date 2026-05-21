@@ -4,13 +4,51 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
 <meta name="theme-color" content="#0a0a0a" />
-<title>Vanilla Coffee — Speciality Coffee & Bakery</title>
+<title>{{ seo.title }}</title>
+<meta name="description" content="{{ seo.description }}" />
+<meta name="keywords" content="{{ seo.keywords }}" />
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+<link rel="canonical" href="{{ canonical }}" />
+<link rel="alternate" hreflang="ru" href="{{ canonical }}?lang=ru" />
+<link rel="alternate" hreflang="uz" href="{{ canonical }}?lang=uz" />
+<link rel="alternate" hreflang="x-default" href="{{ canonical }}" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Vanilla Coffee" />
+<meta property="og:title" content="{{ seo.title }}" />
+<meta property="og:description" content="{{ seo.description }}" />
+<meta property="og:url" content="{{ canonical }}" />
+<meta property="og:image" content="{{ site_url }}/static/img/og.svg" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="{{ seo.title }}" />
+<meta name="twitter:description" content="{{ seo.description }}" />
+<meta name="twitter:image" content="{{ site_url }}/static/img/og.svg" />
+<link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}" />
+<link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='img/favicon.svg') }}" />
+<link rel="apple-touch-icon" href="{{ url_for('static', filename='img/apple-touch-icon.svg') }}" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Inter:wght@300;400;500;600;700;800&family=Pacifico&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}" />
+<script type="application/ld+json">{{ jsonld|safe }}</script>
 </head>
 <body data-table="{{ table or '' }}" data-lang="{{ lang }}">
+<noscript>
+  <section style="padding:24px;max-width:960px;margin:0 auto;">
+    <h1>{{ seo.title }}</h1>
+    <p>{{ seo.description }}</p>
+    {% for category in categories %}
+      <h2>{{ category.name[lang] }}</h2>
+      <ul>
+      {% for product in products if product.category_id == category.id %}
+        <li>
+          <strong>{{ product.name[lang] }}</strong>
+          {% if product.desc[lang] %} — {{ product.desc[lang] }}{% endif %}
+        </li>
+      {% endfor %}
+      </ul>
+    {% endfor %}
+  </section>
+</noscript>
 
 <!-- Loader -->
 <div class="loader" id="loader">

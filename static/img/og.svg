@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1b120d"/>
+      <stop offset="1" stop-color="#5f3b24"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <circle cx="940" cy="170" r="130" fill="#c58a5c" opacity="0.18"/>
+  <circle cx="1020" cy="500" r="170" fill="#f1c49b" opacity="0.12"/>
+  <text x="110" y="285" font-family="Georgia, serif" font-size="106" fill="#ffe8d2">Vanilla Coffee</text>
+  <text x="110" y="360" font-family="Arial, sans-serif" font-size="42" fill="#f6d4b5">Speciality Coffee • Bakery • Breakfast</text>
+  <text x="110" y="430" font-family="Arial, sans-serif" font-size="30" fill="#f2c7a4">Tashkent • 08:00 - 23:00</text>
+</svg>
