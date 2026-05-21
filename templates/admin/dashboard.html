@@ -1,0 +1,82 @@
+{% extends "admin/base.html" %}
+{% block title %}Дашборд — Vanilla Admin{% endblock %}
+{% block page_title %}Привет, бариста ☕{% endblock %}
+{% block page_sub %}Краткий обзор кофейни{% endblock %}
+
+{% block content %}
+<div class="kpi-grid">
+  <div class="kpi-card">
+    <div class="kpi-icon kpi-orange">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg>
+    </div>
+    <div class="kpi-body">
+      <span class="kpi-label">Категорий</span>
+      <strong class="kpi-value">{{ stats.categories }}</strong>
+    </div>
+    <a href="{{ url_for('admin_categories') }}" class="kpi-link">Управлять →</a>
+  </div>
+
+  <div class="kpi-card">
+    <div class="kpi-icon kpi-amber">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+    </div>
+    <div class="kpi-body">
+      <span class="kpi-label">Товаров</span>
+      <strong class="kpi-value">{{ stats.products }}</strong>
+    </div>
+    <a href="{{ url_for('admin_products') }}" class="kpi-link">Управлять →</a>
+  </div>
+
+  <div class="kpi-card">
+    <div class="kpi-icon kpi-green">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+    </div>
+    <div class="kpi-body">
+      <span class="kpi-label">Заказов</span>
+      <strong class="kpi-value">{{ orders|length }}</strong>
+    </div>
+    <a href="{{ url_for('admin_orders') }}" class="kpi-link">Открыть →</a>
+  </div>
+
+  <div class="kpi-card kpi-highlight">
+    <div class="kpi-icon kpi-white">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+    </div>
+    <div class="kpi-body">
+      <span class="kpi-label">Средний чек</span>
+      <strong class="kpi-value">
+        {%- set total = orders|sum(attribute='total') -%}
+        {%- if orders -%}{{ '{:,}'.format((total // orders|length)).replace(',', ' ') }} сум{%- else -%}0 сум{%- endif -%}
+      </strong>
+    </div>
+  </div>
+</div>
+
+<div class="adm-section">
+  <div class="adm-section-head">
+    <h2>Последние заказы</h2>
+    <a href="{{ url_for('admin_orders') }}" class="adm-link">Все заказы →</a>
+  </div>
+  {% if recent_orders %}
+    <div class="adm-list">
+      {% for o in recent_orders %}
+      <div class="adm-row">
+        <div>
+          <div class="row-id">#{{ o.id }}</div>
+          <div class="row-meta">Стол {{ o.table }} · {{ o.created_at[:19].replace('T', ' ') }}</div>
+        </div>
+        <div class="row-items">
+          {% for it in o['items'][:3] %}
+            <span class="row-item">{{ it.qty }}× {{ it.name }}</span>
+          {% endfor %}
+          {% if o['items']|length > 3 %}<span class="row-item">+{{ o['items']|length - 3 }}</span>{% endif %}
+        </div>
+        <div class="row-total">{{ '{:,}'.format(o.total).replace(',', ' ') }} сум</div>
+      </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="adm-empty">Заказов пока нет</div>
+  {% endif %}
+</div>
+{% endblock %}

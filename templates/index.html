@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="{{ lang }}">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+<meta name="theme-color" content="#0a0a0a" />
+<title>Vanilla Coffee — Speciality Coffee & Bakery</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Inter:wght@300;400;500;600;700;800&family=Pacifico&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}" />
+</head>
+<body data-table="{{ table or '' }}" data-lang="{{ lang }}">
+
+<!-- Loader -->
+<div class="loader" id="loader">
+  <div class="loader-cup">
+    <div class="loader-steam"><span></span><span></span><span></span></div>
+    <div class="loader-cup-body"></div>
+    <div class="loader-cup-handle"></div>
+  </div>
+  <div class="loader-text">Vanilla<span>COFFEE</span></div>
+</div>
+
+<!-- Language transition overlay -->
+<div class="lang-overlay" id="langOverlay" aria-hidden="true">
+  <div class="lang-overlay-ring"></div>
+</div>
+
+<!-- Floating beans background -->
+<div class="bean-field" id="beanField"></div>
+
+<!-- Navigation -->
+<nav class="nav" id="nav">
+  <a href="#home" class="nav-logo">
+    <span class="logo-mark">V</span>
+    <span class="logo-text">Vanilla<small>COFFEE</small></span>
+  </a>
+
+  <div class="nav-links" id="navLinks">
+    <a href="#home"    data-i18n="nav.home">{{ t['nav.home'] }}</a>
+    <a href="#about"   data-i18n="nav.about">{{ t['nav.about'] }}</a>
+    <a href="#menu"    data-i18n="nav.menu">{{ t['nav.menu'] }}</a>
+    <a href="#gallery" data-i18n="nav.gallery">{{ t['nav.gallery'] }}</a>
+    <a href="#contact" data-i18n="nav.contact">{{ t['nav.contact'] }}</a>
+  </div>
+
+  <div class="nav-tools">
+    <!-- Language switcher (hover-to-select with loader) -->
+    <div class="lang-switch" id="langSwitch">
+      <button class="lang-current" id="langCurrent" aria-label="Language">
+        <span class="lang-flag" id="langFlag">{{ '🇷🇺' if lang == 'ru' else '🇺🇿' }}</span>
+        <span class="lang-code" id="langCode">{{ lang|upper }}</span>
+        <svg class="lang-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="lang-menu" id="langMenu" aria-hidden="true">
+        <div class="lang-hint" data-i18n="lang.label">{{ t['lang.label'] }}</div>
+        <button class="lang-opt {% if lang == 'ru' %}is-current{% endif %}" data-lang="ru">
+          <span class="lang-opt-flag">🇷🇺</span>
+          <span class="lang-opt-text">Русский</span>
+        </button>
+        <button class="lang-opt {% if lang == 'uz' %}is-current{% endif %}" data-lang="uz">
+          <span class="lang-opt-flag">🇺🇿</span>
+          <span class="lang-opt-text">O‘zbek</span>
+        </button>
+      </div>
+    </div>
+
+    {% if table %}
+    <div class="table-badge">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+      <span data-i18n="nav.table">{{ t['nav.table'] }}</span> {{ table }}
+    </div>
+    {% endif %}
+
+    <button class="cart-btn" id="cartBtn" aria-label="Cart">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+      <span class="cart-count" id="cartCount">0</span>
+    </button>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg">
+    <div class="hero-glow"></div>
+    <div class="hero-bean hero-bean-1"></div>
+    <div class="hero-bean hero-bean-2"></div>
+    <div class="hero-bean hero-bean-3"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-tag">
+      <span class="dot"></span> <span data-i18n="hero.tag">{{ t['hero.tag'] }}</span>
+    </div>
+    <h1 class="hero-title">
+      <span class="line" data-i18n="hero.title1">{{ t['hero.title1'] }}</span>
+      <span class="line accent"><span data-i18n="hero.title2a">{{ t['hero.title2a'] }}</span> <em data-i18n="hero.title2b">{{ t['hero.title2b'] }}</em></span>
+    </h1>
+    <p class="hero-sub" data-i18n="hero.sub">{{ t['hero.sub'] }}</p>
+    <div class="hero-actions">
+      <a href="#menu" class="btn btn-primary">
+        <span data-i18n="hero.open">{{ t['hero.open'] }}</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <a href="#about" class="btn btn-ghost" data-i18n="hero.about">{{ t['hero.about'] }}</a>
+    </div>
+    <div class="hero-meta">
+      <div class="meta-item"><strong data-i18n="hero.m1l">{{ t['hero.m1l'] }}</strong><span data-i18n="hero.m1s">{{ t['hero.m1s'] }}</span></div>
+      <div class="meta-divider"></div>
+      <div class="meta-item"><strong data-i18n="hero.m2l">{{ t['hero.m2l'] }}</strong><span data-i18n="hero.m2s">{{ t['hero.m2s'] }}</span></div>
+      <div class="meta-divider"></div>
+      <div class="meta-item"><strong data-i18n="hero.m3l">{{ t['hero.m3l'] }}</strong><span data-i18n="hero.m3s">{{ t['hero.m3s'] }}</span></div>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="cup-wrap">
+      <div class="cup-steam"><span></span><span></span><span></span><span></span></div>
+      <div class="cup">
+        <div class="cup-rim"></div>
+        <div class="cup-coffee"></div>
+        <div class="cup-foam"></div>
+        <div class="cup-handle"></div>
+      </div>
+      <div class="cup-shadow"></div>
+      <div class="cup-orbit cup-orbit-1"></div>
+      <div class="cup-orbit cup-orbit-2"></div>
+      <div class="floating-bean fb1"></div>
+      <div class="floating-bean fb2"></div>
+      <div class="floating-bean fb3"></div>
+    </div>
+  </div>
+  <a href="#about" class="scroll-down" aria-label="Scroll"><span></span></a>
+</section>
+
+<!-- ABOUT -->
+<section class="about reveal" id="about">
+  <div class="section-head">
+    <span class="kicker" data-i18n="about.kicker">{{ t['about.kicker'] }}</span>
+    <h2><span data-i18n="about.title1">{{ t['about.title1'] }}</span> <em data-i18n="about.title2">{{ t['about.title2'] }}</em></h2>
+  </div>
+  <div class="about-grid">
+    <div class="about-text">
+      <p data-i18n="about.p1">{{ t['about.p1'] }}</p>
+      <p data-i18n="about.p2">{{ t['about.p2'] }}</p>
+      <div class="about-stats">
+        <div class="stat"><strong data-i18n="about.stat1l">{{ t['about.stat1l'] }}</strong><span data-i18n="about.stat1s">{{ t['about.stat1s'] }}</span></div>
+        <div class="stat"><strong data-i18n="about.stat2l">{{ t['about.stat2l'] }}</strong><span data-i18n="about.stat2s">{{ t['about.stat2s'] }}</span></div>
+        <div class="stat"><strong data-i18n="about.stat3l">{{ t['about.stat3l'] }}</strong><span data-i18n="about.stat3s">{{ t['about.stat3s'] }}</span></div>
+      </div>
+    </div>
+    <div class="about-features">
+      <div class="feature">
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg></div>
+        <h3 data-i18n="about.f1t">{{ t['about.f1t'] }}</h3>
+        <p data-i18n="about.f1d">{{ t['about.f1d'] }}</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 13.87A4 4 0 017.41 6a5.11 5.11 0 011.05-1.54 5 5 0 017.08 0A5.11 5.11 0 0116.59 6 4 4 0 0118 13.87V21H6z"/><line x1="6" y1="17" x2="18" y2="17"/></svg></div>
+        <h3 data-i18n="about.f2t">{{ t['about.f2t'] }}</h3>
+        <p data-i18n="about.f2d">{{ t['about.f2d'] }}</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></div>
+        <h3 data-i18n="about.f3t">{{ t['about.f3t'] }}</h3>
+        <p data-i18n="about.f3d">{{ t['about.f3d'] }}</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+        <h3 data-i18n="about.f4t">{{ t['about.f4t'] }}</h3>
+        <p data-i18n="about.f4d">{{ t['about.f4d'] }}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section class="menu reveal" id="menu">
+  <div class="section-head">
+    <span class="kicker" data-i18n="menu.kicker">{{ t['menu.kicker'] }}</span>
+    <h2><span data-i18n="menu.title1">{{ t['menu.title1'] }}</span> <em data-i18n="menu.title2">{{ t['menu.title2'] }}</em> <span data-i18n="menu.title3">{{ t['menu.title3'] }}</span></h2>
+    <p class="section-sub" data-i18n="menu.sub">{{ t['menu.sub'] }}</p>
+  </div>
+
+  <div class="menu-search">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input type="search" id="menuSearch" data-i18n-attr="placeholder|menu.search" placeholder="{{ t['menu.search'] }}" />
+  </div>
+
+  <div class="menu-tabs" id="menuTabs"></div>
+  <div class="menu-grid" id="menuGrid"></div>
+  <div class="menu-empty" id="menuEmpty" hidden>
+    <p data-i18n="menu.empty">{{ t['menu.empty'] }}</p>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery reveal" id="gallery">
+  <div class="section-head">
+    <span class="kicker" data-i18n="gal.kicker">{{ t['gal.kicker'] }}</span>
+    <h2><span data-i18n="gal.title1">{{ t['gal.title1'] }}</span> <em data-i18n="gal.title2">{{ t['gal.title2'] }}</em></h2>
+  </div>
+  <div class="gallery-grid">
+    <div class="g-item g-1"><div class="g-overlay"><span data-i18n="gal.bar">{{ t['gal.bar'] }}</span></div></div>
+    <div class="g-item g-2"><div class="g-overlay"><span data-i18n="gal.hall">{{ t['gal.hall'] }}</span></div></div>
+    <div class="g-item g-3"><div class="g-overlay"><span data-i18n="gal.breakfast">{{ t['gal.breakfast'] }}</span></div></div>
+    <div class="g-item g-4"><div class="g-overlay"><span data-i18n="gal.bakery">{{ t['gal.bakery'] }}</span></div></div>
+    <div class="g-item g-5"><div class="g-overlay"><span data-i18n="gal.terrace">{{ t['gal.terrace'] }}</span></div></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact reveal" id="contact">
+  <div class="section-head">
+    <span class="kicker" data-i18n="cnt.kicker">{{ t['cnt.kicker'] }}</span>
+    <h2><span data-i18n="cnt.title1">{{ t['cnt.title1'] }}</span> <em data-i18n="cnt.title2">{{ t['cnt.title2'] }}</em></h2>
+  </div>
+  <div class="contact-grid">
+    <div class="contact-card">
+      <div class="cc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+      <h3 data-i18n="cnt.addr_t">{{ t['cnt.addr_t'] }}</h3>
+      <p data-i18n-html="cnt.addr_v">{{ t['cnt.addr_v']|safe }}</p>
+    </div>
+    <div class="contact-card">
+      <div class="cc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+      <h3 data-i18n="cnt.hours_t">{{ t['cnt.hours_t'] }}</h3>
+      <p data-i18n-html="cnt.hours_v">{{ t['cnt.hours_v']|safe }}</p>
+    </div>
+    <div class="contact-card">
+      <div class="cc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg></div>
+      <h3 data-i18n="cnt.contact_t">{{ t['cnt.contact_t'] }}</h3>
+      <p data-i18n-html="cnt.contact_v">{{ t['cnt.contact_v']|safe }}</p>
+    </div>
+    <div class="contact-card highlight">
+      <div class="cc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg></div>
+      <h3 data-i18n="cnt.qr_t">{{ t['cnt.qr_t'] }}</h3>
+      <p data-i18n="cnt.qr_v">{{ t['cnt.qr_v'] }}</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <span class="logo-mark big">V</span>
+      <span class="logo-text big">Vanilla<small>COFFEE</small></span>
+    </div>
+    <p class="footer-tag" data-i18n="ftr.tag">{{ t['ftr.tag'] }}</p>
+    <div class="footer-social">
+      <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+      <a href="#" aria-label="Telegram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.5 4.5L2.5 12.5l5 2 2 6 3-4 5 4 4-16z"/></svg></a>
+      <a href="#" aria-label="Phone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg></a>
+    </div>
+    <div class="footer-copy" data-i18n="ftr.copy">{{ t['ftr.copy'] }}</div>
+  </div>
+</footer>
+
+<!-- CART DRAWER -->
+<aside class="cart-drawer" id="cartDrawer" aria-hidden="true">
+  <div class="cart-head">
+    <h3><span data-i18n="cart.title">{{ t['cart.title'] }}</span>{% if table %}<small>· <span data-i18n="nav.table">{{ t['nav.table'] }}</span> {{ table }}</small>{% endif %}</h3>
+    <button class="cart-close" id="cartClose" aria-label="Close">✕</button>
+  </div>
+  <div class="cart-body" id="cartBody">
+    <div class="cart-empty" id="cartEmpty">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+      <p data-i18n="cart.empty">{{ t['cart.empty'] }}</p>
+      <span data-i18n="cart.empty_sub">{{ t['cart.empty_sub'] }}</span>
+    </div>
+  </div>
+  <div class="cart-foot">
+    <textarea id="cartNote" class="cart-note" data-i18n-attr="placeholder|cart.note" placeholder="{{ t['cart.note'] }}" maxlength="300"></textarea>
+    <div class="cart-total">
+      <span data-i18n="cart.total">{{ t['cart.total'] }}</span>
+      <strong id="cartTotal">0</strong>
+    </div>
+    <button class="btn btn-primary btn-full" id="checkoutBtn" disabled data-i18n="cart.checkout">{{ t['cart.checkout'] }}</button>
+  </div>
+</aside>
+<div class="cart-backdrop" id="cartBackdrop"></div>
+
+<!-- PRODUCT DETAIL MODAL -->
+<div class="modal product-modal" id="productModal" aria-hidden="true">
+  <div class="modal-card product-card">
+    <button class="modal-x" id="productClose" aria-label="Close">✕</button>
+    <div class="pm-image"><img id="pmImg" alt=""/></div>
+    <div class="pm-body">
+      <span class="pm-tag" id="pmTag" hidden></span>
+      <h3 id="pmName">—</h3>
+      <p id="pmDesc">—</p>
+
+      <div class="pm-section">
+        <div class="pm-section-title" data-i18n="menu.ingredients">{{ t['menu.ingredients'] }}</div>
+        <ul class="pm-ingredients" id="pmIngredients"></ul>
+      </div>
+
+      <div class="pm-section">
+        <div class="pm-section-title" data-i18n="menu.size">{{ t['menu.size'] }}</div>
+        <div class="pm-sizes" id="pmSizes"></div>
+      </div>
+
+      <div class="pm-foot">
+        <div class="pm-price"><span data-i18n="menu.price">{{ t['menu.price'] }}:</span> <strong id="pmPrice">—</strong></div>
+        <button class="btn btn-primary" id="pmAdd">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          <span data-i18n="menu.add">{{ t['menu.add'] }}</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Order success modal -->
+<div class="modal" id="orderModal" aria-hidden="true">
+  <div class="modal-card">
+    <div class="modal-check">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    <h3 data-i18n="ord.ok">{{ t['ord.ok'] }}</h3>
+    <p><span data-i18n="ord.num">{{ t['ord.num'] }}</span>: <strong id="orderId">—</strong></p>
+    <p class="modal-sub" id="orderEtaText">—</p>
+    <button class="btn btn-primary" id="modalClose" data-i18n="ord.great">{{ t['ord.great'] }}</button>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>

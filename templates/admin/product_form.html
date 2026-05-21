@@ -1,0 +1,187 @@
+{% extends "admin/base.html" %}
+{% block title %}{{ 'Новый товар' if mode == 'new' else 'Товар · ' + product.name_ru }} — Vanilla Admin{% endblock %}
+{% block page_title %}{{ 'Новый товар' if mode == 'new' else 'Редактирование товара' }}{% endblock %}
+{% block page_sub %}{{ 'Добавьте новую позицию в меню' if mode == 'new' else 'id: ' + product.id }}{% endblock %}
+{% block actions %}
+  <a href="{{ url_for('admin_products') }}" class="btn-ghost-adm">← Назад</a>
+{% endblock %}
+
+{% block content %}
+{% set ing_ru = (product.ingredients_ru if product else '[]') %}
+{% set ing_uz = (product.ingredients_uz if product else '[]') %}
+
+<form method="POST" class="adm-form pf">
+
+  <div class="pf-grid">
+
+    <!-- LEFT: form fields -->
+    <div class="pf-fields">
+
+      <fieldset>
+        <legend>Основное</legend>
+        <div class="form-row two">
+          <label>
+            <span>Название (RU) <em>*</em></span>
+            <input type="text" name="name_ru" value="{{ product.name_ru if product else '' }}" required />
+          </label>
+          <label>
+            <span>Название (UZ) <em>*</em></span>
+            <input type="text" name="name_uz" value="{{ product.name_uz if product else '' }}" required />
+          </label>
+        </div>
+
+        <div class="form-row two">
+          <label>
+            <span>Категория <em>*</em></span>
+            <select name="category_id" required>
+              <option value="">— выберите —</option>
+              {% for c in categories %}
+                <option value="{{ c.id }}" {% if product and product.category_id == c.id %}selected{% endif %}>{{ c.icon or '·' }} {{ c.name_ru }}</option>
+              {% endfor %}
+            </select>
+          </label>
+          <label>
+            <span>Сортировка</span>
+            <input type="number" name="sort_order" value="{{ product.sort_order if product else 0 }}" />
+          </label>
+        </div>
+
+        <div class="form-row two">
+          <label>
+            <span>Тег / бейдж (RU)</span>
+            <input type="text" name="tag_ru" value="{{ product.tag_ru if product else '' }}" placeholder="напр. Хит, Premium" />
+          </label>
+          <label>
+            <span>Тег / бейдж (UZ)</span>
+            <input type="text" name="tag_uz" value="{{ product.tag_uz if product else '' }}" placeholder="masalan: Hit, Premium" />
+          </label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Описание</legend>
+        <label>
+          <span>Описание (RU)</span>
+          <textarea name="desc_ru" rows="2">{{ product.desc_ru if product else '' }}</textarea>
+        </label>
+        <label>
+          <span>Описание (UZ)</span>
+          <textarea name="desc_uz" rows="2">{{ product.desc_uz if product else '' }}</textarea>
+        </label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Состав / Tarkibi <small>(одна строка = один ингредиент)</small></legend>
+        <div class="form-row two">
+          <label>
+            <span>Состав (RU)</span>
+            <textarea name="ingredients_ru" rows="5" placeholder="Эспрессо&#10;Молоко&#10;Сахар">{% if product %}{% for x in product.ingredients_ru|from_json %}{{ x }}
+{% endfor %}{% endif %}</textarea>
+          </label>
+          <label>
+            <span>Tarkibi (UZ)</span>
+            <textarea name="ingredients_uz" rows="5" placeholder="Espresso&#10;Sut&#10;Shakar">{% if product %}{% for x in product.ingredients_uz|from_json %}{{ x }}
+{% endfor %}{% endif %}</textarea>
+          </label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Размеры и цены <em>*</em></legend>
+        <div id="sizesList" class="sizes-list">
+          {% set sz = (product.sizes if product else []) %}
+          {% if sz %}
+            {% for s in sz %}
+              <div class="size-row">
+                <input type="text" name="size_label" value="{{ s.size_label }}" placeholder="напр. 350 / 1 шт" required />
+                <select name="size_kind">
+                  <option value="ml"    {% if s.size_kind == 'ml'    %}selected{% endif %}>мл</option>
+                  <option value="piece" {% if s.size_kind == 'piece' %}selected{% endif %}>шт</option>
+                </select>
+                <input type="number" name="size_price" value="{{ s.price }}" placeholder="Цена в сум" min="0" required />
+                <button type="button" class="ic-btn danger size-del" title="Удалить">✕</button>
+              </div>
+            {% endfor %}
+          {% else %}
+            <div class="size-row">
+              <input type="text" name="size_label" placeholder="напр. 350" required />
+              <select name="size_kind">
+                <option value="ml">мл</option>
+                <option value="piece">шт</option>
+              </select>
+              <input type="number" name="size_price" placeholder="Цена в сум" min="0" required />
+              <button type="button" class="ic-btn danger size-del" title="Удалить">✕</button>
+            </div>
+          {% endif %}
+        </div>
+        <button type="button" id="addSize" class="btn-ghost-adm sm">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Добавить размер
+        </button>
+      </fieldset>
+    </div>
+
+    <!-- RIGHT: image preview -->
+    <aside class="pf-image">
+      <label>
+        <span>URL изображения</span>
+        <input type="url" name="img" id="imgUrl" value="{{ product.img if product else '' }}" placeholder="https://..." />
+      </label>
+      <div class="img-preview" id="imgPreview">
+        {% if product and product.img %}
+          <img src="{{ product.img }}" alt="" onerror="this.style.opacity=0.3"/>
+        {% else %}
+          <div class="img-placeholder">🖼 Превью</div>
+        {% endif %}
+      </div>
+      <p class="hint">Совет: используйте ссылку на Unsplash или загруженный файл по прямой ссылке.</p>
+    </aside>
+  </div>
+
+  <div class="form-foot">
+    {% if mode == 'edit' %}
+      <button type="submit" form="deleteProd" class="btn-danger-adm">Удалить</button>
+    {% endif %}
+    <button type="submit" class="btn-primary-adm">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+      Сохранить
+    </button>
+  </div>
+</form>
+
+{% if mode == 'edit' %}
+  <form id="deleteProd" method="POST" action="{{ url_for('admin_product_delete', pid=product.id) }}"
+        onsubmit="return confirm('Удалить «{{ product.name_ru }}»?');"></form>
+{% endif %}
+
+<script>
+  // Dynamic size rows
+  const list = document.getElementById('sizesList');
+  document.getElementById('addSize').addEventListener('click', () => {
+    const row = document.createElement('div');
+    row.className = 'size-row';
+    row.innerHTML = `
+      <input type="text" name="size_label" placeholder="напр. 450" required />
+      <select name="size_kind"><option value="ml">мл</option><option value="piece">шт</option></select>
+      <input type="number" name="size_price" placeholder="Цена в сум" min="0" required />
+      <button type="button" class="ic-btn danger size-del" title="Удалить">✕</button>`;
+    list.appendChild(row);
+  });
+  list.addEventListener('click', (e) => {
+    const del = e.target.closest('.size-del');
+    if (!del) return;
+    if (list.querySelectorAll('.size-row').length <= 1) return;
+    del.closest('.size-row').remove();
+  });
+
+  // Image preview
+  const urlEl = document.getElementById('imgUrl');
+  const prev = document.getElementById('imgPreview');
+  urlEl.addEventListener('input', () => {
+    const url = urlEl.value.trim();
+    prev.innerHTML = url
+      ? `<img src="${url}" alt="" onerror="this.style.opacity=0.3"/>`
+      : `<div class="img-placeholder">🖼 Превью</div>`;
+  });
+</script>
+{% endblock %}

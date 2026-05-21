@@ -1,0 +1,34 @@
+{% extends "admin/base.html" %}
+{% block title %}Заказы — Vanilla Admin{% endblock %}
+{% block page_title %}Заказы{% endblock %}
+{% block page_sub %}{{ orders|length }} заказов всего · обновляется каждые 15 сек{% endblock %}
+
+{% block content %}
+<div class="orders-grid">
+  {% for o in orders %}
+  <div class="order-card">
+    <div class="order-head">
+      <div class="order-id">#{{ o.id }}</div>
+      <span class="order-table">Стол {{ o.table }}</span>
+    </div>
+    <ul class="order-items">
+      {% for it in o['items'] %}
+        <li>
+          <span><span class="q">{{ it.qty }}×</span> {{ it.name }} <small>({{ it.size }})</small></span>
+          <span>{{ '{:,}'.format(it.price * it.qty).replace(',', ' ') }}</span>
+        </li>
+      {% endfor %}
+    </ul>
+    {% if o.note %}<div class="order-note">"{{ o.note }}"</div>{% endif %}
+    <div class="order-foot">
+      <span class="order-time">{{ o.created_at[:19].replace('T', ' ') }}</span>
+      <span class="order-total">{{ '{:,}'.format(o.total).replace(',', ' ') }} сум</span>
+    </div>
+  </div>
+  {% else %}
+  <div class="adm-empty">Заказов пока нет</div>
+  {% endfor %}
+</div>
+
+<script>setTimeout(() => location.reload(), 15000);</script>
+{% endblock %}

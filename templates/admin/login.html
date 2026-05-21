@@ -1,0 +1,41 @@
+{% extends "admin/base.html" %}
+{% block title %}Вход — Vanilla Admin{% endblock %}
+
+{% block body %}
+<div class="login-page">
+  <div class="login-bg">
+    <div class="login-glow"></div>
+  </div>
+  <div class="login-card">
+    <div class="login-brand">
+      <span class="adm-logo big">V</span>
+      <div>
+        <div class="login-title">Vanilla<small>COFFEE · ADMIN</small></div>
+      </div>
+    </div>
+    <h2>С возвращением</h2>
+    <p class="login-sub">Войдите, чтобы управлять меню и заказами</p>
+
+    {% if error %}
+      <div class="login-error">{{ error }}</div>
+    {% endif %}
+
+    <form method="POST" class="login-form">
+      <label>
+        <span>Логин</span>
+        <input type="text" name="username" autocomplete="username" required autofocus />
+      </label>
+      <label>
+        <span>Пароль</span>
+        <input type="password" name="password" autocomplete="current-password" required />
+      </label>
+      <button class="btn-primary-adm" type="submit">
+        Войти
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </button>
+    </form>
+
+    <a href="/" class="login-back">← на сайт</a>
+  </div>
+</div>
+{% endblock %}

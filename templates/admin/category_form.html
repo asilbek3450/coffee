@@ -1,0 +1,47 @@
+{% extends "admin/base.html" %}
+{% block title %}{{ 'Новая категория' if mode == 'new' else 'Категория · ' + cat.name_ru }} — Vanilla Admin{% endblock %}
+{% block page_title %}{{ 'Новая категория' if mode == 'new' else 'Редактирование категории' }}{% endblock %}
+{% block page_sub %}{{ 'Добавьте новый раздел в меню' if mode == 'new' else 'id: ' + cat.id }}{% endblock %}
+{% block actions %}
+  <a href="{{ url_for('admin_categories') }}" class="btn-ghost-adm">← Назад</a>
+{% endblock %}
+
+{% block content %}
+<form method="POST" class="adm-form" enctype="application/x-www-form-urlencoded">
+  <div class="form-row two">
+    <label>
+      <span>Название (RU) <em>*</em></span>
+      <input type="text" name="name_ru" value="{{ cat.name_ru if cat else '' }}" required />
+    </label>
+    <label>
+      <span>Название (UZ) <em>*</em></span>
+      <input type="text" name="name_uz" value="{{ cat.name_uz if cat else '' }}" required />
+    </label>
+  </div>
+  <div class="form-row two">
+    <label>
+      <span>Иконка (эмодзи)</span>
+      <input type="text" name="icon" value="{{ cat.icon if cat else '☕' }}" maxlength="4" />
+    </label>
+    <label>
+      <span>Порядок сортировки</span>
+      <input type="number" name="sort_order" value="{{ cat.sort_order if cat else 0 }}" />
+    </label>
+  </div>
+
+  <div class="form-foot">
+    {% if mode == 'edit' %}
+      <button type="submit" form="deleteCat" class="btn-danger-adm">Удалить</button>
+    {% endif %}
+    <button type="submit" class="btn-primary-adm">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+      Сохранить
+    </button>
+  </div>
+</form>
+
+{% if mode == 'edit' %}
+  <form id="deleteCat" method="POST" action="{{ url_for('admin_category_delete', cid=cat.id) }}"
+        onsubmit="return confirm('Удалить категорию «{{ cat.name_ru }}»?');"></form>
+{% endif %}
+{% endblock %}
