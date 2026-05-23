@@ -120,7 +120,7 @@
   <div class="menu-hero-inner">
     <span class="menu-kicker">{{ t['menu.kicker'] }}</span>
     <h1>{{ section.icon }} {{ section.name }}</h1>
-    <p>{{ section.items_count }} {{ t['menu.items_count'] }} · {{ t['menu.from'] }} {{ "{:,}".format(section.min_price).replace(",", " ") }} {{ t['curr.sum'] }}</p>
+    <p>{{ section.items_count }} {{ t['menu.items_count'] }} · {% if t['menu.from'] %}{{ t['menu.from'] }} {% endif %}{{ "{:,}".format(section.min_price).replace(",", " ") }} {{ t['curr.sum'] }}{% if t['menu.from_suffix'] %} {{ t['menu.from_suffix'] }}{% endif %}</p>
   </div>
 </header>
 
@@ -149,7 +149,7 @@
           <div class="menu-prices">
             {% for size in product.sizes %}
             <button class="price-pill {% if loop.first %}active{% endif %}" data-size="{{ size.label }}" data-price="{{ size.price }}">
-              <span class="size">{{ size.label }}{% if size.kind == 'ml' %} {{ t['curr.ml'] }}{% endif %}</span>
+              <span class="size">{% if size.kind == 'ml' %}{{ size.label }} {{ t['curr.ml'] }}{% else %}{{ t['menu.piece'] }}{% endif %}</span>
               <span class="amount">{{ ((size.price / 1000) | int) }}k</span>
             </button>
             {% endfor %}

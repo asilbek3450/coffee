@@ -85,7 +85,7 @@
       <div class="menu-spotlight-copy">
         <span class="menu-spotlight-icon">{{ section.icon }}</span>
         <h2>{{ section.name }}</h2>
-        <p>{{ section.items_count }} {{ t['menu.items_count'] }} · {{ section.min_price }} UZS</p>
+        <p>{{ section.items_count }} {{ t['menu.items_count'] }} · {% if t['menu.from'] %}{{ t['menu.from'] }} {% endif %}{{ "{:,}".format(section.min_price).replace(",", " ") }} {{ t['curr.sum'] }}{% if t['menu.from_suffix'] %} {{ t['menu.from_suffix'] }}{% endif %}</p>
         <span class="menu-spotlight-cta">{{ t['menu.page_hint'] }}</span>
       </div>
     </article>

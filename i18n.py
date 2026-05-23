@@ -80,7 +80,9 @@ I18N = {
     "menu.page_hint": {"ru": "Нажмите, чтобы открыть", "uz": "Ochish uchun bosing"},
     "menu.back_home": {"ru": "На главную", "uz": "Bosh sahifaga"},
     "menu.items_count": {"ru": "позиций", "uz": "ta mahsulot"},
-    "menu.from":     {"ru": "от", "uz": "dan"},
+    "menu.from":        {"ru": "от", "uz": ""},
+    "menu.from_suffix": {"ru": "",   "uz": "dan boshlab"},
+    "menu.piece":       {"ru": "1 шт", "uz": "1 dona"},
 
     # Gallery
     "gal.kicker":    {"ru": "Атмосфера", "uz": "Atmosfera"},
@@ -97,7 +99,7 @@ I18N = {
     "cnt.title1":    {"ru": "Загляните", "uz": "Bir piyola"},
     "cnt.title2":    {"ru": "на чашечку","uz": "uchun keling"},
     "cnt.addr_t":    {"ru": "Адрес",     "uz": "Manzil"},
-    "cnt.addr_v":    {"ru": "г. Ташкент<br/>ул. Coffee Street, 24", "uz": "Toshkent sh.<br/>Coffee Street ko‘chasi, 24"},
+    "cnt.addr_v":    {"ru": "г. Ташкент<br/>ул. Афросиёб, 1", "uz": "Toshkent sh.<br/>Afrosiyob ko‘chasi, 1"},
     "cnt.hours_t":   {"ru": "Часы работы","uz": "Ish vaqti"},
     "cnt.hours_v":   {"ru": "Пн–Вс<br/>08:00 — 23:00","uz": "Du–Ya<br/>08:00 — 23:00"},
     "cnt.contact_t": {"ru": "Контакты",  "uz": "Bog‘lanish"},

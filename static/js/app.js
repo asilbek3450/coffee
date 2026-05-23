@@ -40,7 +40,7 @@ function t(key, vars = {}) {
   return s;
 }
 const fmt = (n) => n.toLocaleString('ru-RU') + ' ' + t('curr.sum');
-const sizeLabel = (s) => s.kind === 'piece' ? s.label : s.label + ' ' + t('curr.ml');
+const sizeLabel = (s) => s.kind === 'piece' ? t('menu.piece') : s.label + ' ' + t('curr.ml');
 const productName = (p) => (p.name && p.name[state.lang]) || p.name.ru;
 const productDesc = (p) => (p.desc && p.desc[state.lang]) || p.desc.ru;
 const productIng  = (p) => (p.ingredients && p.ingredients[state.lang]) || p.ingredients.ru || [];
@@ -327,7 +327,7 @@ function renderCart() {
         <div class="cart-item-img" style="background-image:url('${product.img}')"></div>
         <div class="cart-item-info">
           <div class="cart-item-name">${productName(product)}</div>
-          <div class="cart-item-meta">${c.size}${/^\d+$/.test(c.size) ? ' ' + t('curr.ml') : ''} · ${fmt(c.price)}</div>
+          <div class="cart-item-meta">${/^\d+$/.test(c.size) ? c.size + ' ' + t('curr.ml') : t('menu.piece')} · ${fmt(c.price)}</div>
           <div class="cart-item-controls">
             <div class="qty">
               <button data-act="dec">−</button>
