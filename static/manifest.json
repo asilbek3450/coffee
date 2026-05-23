@@ -1,7 +1,7 @@
 {
-  "name": "Vanilla Coffee — Speciality Café & Bakery",
-  "short_name": "Vanilla Coffee",
-  "description": "Vanilla Coffee — уютная speciality-кофейня в Ташкенте. Кофе, домашняя выпечка, авторские напитки, QR-меню.",
+  "name": "Wanilla Coffee — Vanilla Coffee · Speciality kafe Toshkentda",
+  "short_name": "Wanilla Coffee",
+  "description": "Wanilla Coffee (Vanilla Coffee) — Toshkentdagi speciality kafe. Kofe, latte, raf, kapuchino, uy shirinliklari, nonushta, QR-menyu.",
   "start_url": "/?utm_source=pwa",
   "scope": "/",
   "display": "standalone",

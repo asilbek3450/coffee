@@ -21,7 +21,12 @@
       "Bash(curl -sS \"http://127.0.0.1:5051/menu/category/hot\")",
       "Bash(curl -sS -I http://127.0.0.1:5051/static/css/styles.css)",
       "Bash(curl -sS -I http://127.0.0.1:5051/)",
-      "Bash(xargs -r kill)"
+      "Bash(xargs -r kill)",
+      "Bash(PORT=5052 SITE_URL=https://wanillacoffee.mirolimov.uz venv/bin/python app.py)",
+      "Bash(curl -sS http://127.0.0.1:5052/)",
+      "Bash(curl -sS http://127.0.0.1:5052/sitemap.xml)",
+      "Bash(curl -sS http://127.0.0.1:5052/robots.txt)",
+      "Bash(python3 -c \"import sys,re,json; m=re.search\\(r'<script type=\\\\\"application/ld\\\\+json\\\\\">\\(.*?\\)</script>', sys.stdin.read\\(\\), re.S\\); data=json.loads\\(m.group\\(1\\)\\); print\\(json.dumps\\([{'type':n['@type'],'name':n.get\\('name'\\),'alternateName':n.get\\('alternateName'\\),'sameAs':n.get\\('sameAs'\\)} for n in data['@graph']], indent=2, ensure_ascii=False\\)\\)\")"
     ]
   }
 }

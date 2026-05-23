@@ -23,7 +23,10 @@ IS_PROD = os.environ.get("RAILWAY_ENVIRONMENT") or os.environ.get("FLASK_ENV") =
 SECRET_KEY = os.environ.get("SECRET_KEY") or ("dev-" + secrets.token_hex(16))
 ADMIN_USERNAME = os.environ.get("ADMIN_USERNAME", "admin")
 ADMIN_PASSWORD = os.environ.get("ADMIN_PASSWORD", "wcoffee-admin")
-SITE_URL = (os.environ.get("SITE_URL", "http://localhost:5050")).rstrip("/")
+SITE_URL = (os.environ.get("SITE_URL", "https://wanillacoffee.mirolimov.uz")).rstrip("/")
+# Search-engine verification tokens (set in Railway env). Leave empty to skip.
+GOOGLE_SITE_VERIFICATION = os.environ.get("GOOGLE_SITE_VERIFICATION", "")
+YANDEX_VERIFICATION = os.environ.get("YANDEX_VERIFICATION", "")
 
 DATA_DIR = os.environ.get("DATA_DIR") or os.path.dirname(__file__)
 os.makedirs(DATA_DIR, exist_ok=True)
@@ -89,7 +92,11 @@ def inject_asset_url():
             version = None
         return url_for("static", filename=filename, v=version)
 
-    return {"asset_url": asset_url}
+    return {
+        "asset_url": asset_url,
+        "google_site_verification": GOOGLE_SITE_VERIFICATION,
+        "yandex_verification": YANDEX_VERIFICATION,
+    }
 
 
 # ---------- BOOTSTRAP: ensure DB exists & seeded ----------
@@ -129,32 +136,56 @@ def current_lang():
 # ---------- SEO HELPERS ----------
 SEO = {
     "ru": {
-        "title": "Vanilla Coffee — Спешелти кофейня в Ташкенте | Кофе, выпечка, завтраки",
+        "title": (
+            "Wanilla Coffee — кофейня №1 в Ташкенте · Vanilla Coffee · Спешелти кофе и выпечка"
+        ),
         "description": (
-            "Vanilla Coffee — уютная speciality-кофейня в Ташкенте. "
-            "Свежеобжаренный кофе, домашняя выпечка, авторские напитки, завтраки, фреши. "
-            "QR-меню, заказ со столика, работаем с 8:00 до 23:00."
+            "Wanilla Coffee (Vanilla Coffee) — лучшая speciality-кофейня в Ташкенте. "
+            "Свежеобжаренный кофе, латте, раф, капучино, фильтр, домашняя выпечка, авторские "
+            "напитки, завтраки, фреши. QR-меню, заказ со столика. Открыты с 8:00 до 23:00."
         ),
         "keywords": (
-            "Vanilla Coffee, ваниль кофе, ванилла кофе, кофейня Ташкент, speciality coffee, "
-            "кофе с собой, латте, капучино, раф, фреши, домашняя выпечка, завтраки Ташкент, "
-            "лучшая кофейня, coffee shop Tashkent"
+            "Wanilla Coffee, Vanilla Coffee, Wanilla, Vanilla, Vanila, "
+            "ваниль кофе, ванилла кофе, ваниль, ванилла, ваниллакофе, "
+            "кофейня Ташкент, лучшая кофейня Ташкент, кофейня Ташкент рейтинг, "
+            "speciality coffee Tashkent, coffee shop Tashkent, кофе Ташкент, "
+            "латте Ташкент, капучино, раф, флэт уайт, фильтр кофе, эспрессо, "
+            "кофе с собой Ташкент, фреши, домашняя выпечка, круассаны, завтраки Ташкент, "
+            "QR-меню кофейня, кофейня рядом, кофейня в центре Ташкента"
         ),
     },
     "uz": {
-        "title": "Vanilla Coffee — Toshkentdagi speciality kafe | Kofe, shirinliklar, nonushta",
+        "title": (
+            "Wanilla Coffee — Toshkentdagi №1 kafe · Vanilla Coffee · Speciality kofe va shirinliklar"
+        ),
         "description": (
-            "Vanilla Coffee — Toshkent markazidagi qulay speciality kafe. "
-            "Yangi qovurilgan kofe, uy shirinliklari, mualliflik ichimliklari, "
-            "nonushta va freshlar. QR-menyu va stoldan turib buyurtma. 8:00–23:00."
+            "Wanilla Coffee (Vanilla Coffee) — Toshkentdagi eng yaxshi speciality kafe. "
+            "Yangi qovurilgan kofe, latte, raf, kapuchino, filtr, uy shirinliklari, mualliflik "
+            "ichimliklari, nonushta, freshlar. QR-menyu, stoldan buyurtma. 8:00–23:00."
         ),
         "keywords": (
-            "Vanilla Coffee, vanilla kofe, vanilla, kofe, Toshkent kafe, speciality coffee, "
-            "latte, kapuchino, raf, fresh sharbat, uy shirinliklari, nonushta Toshkent, "
-            "Toshkentdagi eng yaxshi kafe, coffee shop Tashkent"
+            "Wanilla Coffee, Vanilla Coffee, Wanilla, Vanilla, Vanila, "
+            "vanilla kofe, vanilla, vanila kofe, vanilla coffe, "
+            "Toshkentdagi eng yaxshi kafe, Toshkent kafe, Toshkent kofeshop, "
+            "speciality coffee Tashkent, coffee shop Tashkent, kofe Toshkent, "
+            "latte, kapuchino, raf, flat white, filtr kofe, espresso, "
+            "kofe olib ketish, fresh sharbat, uy shirinliklari, kruassan, nonushta Toshkent, "
+            "QR menyu kafe, yaqin kafe, Toshkent markazidagi kafe"
         ),
     },
 }
+
+# All known brand spellings — used for JSON-LD alternateName + page meta.
+BRAND_ALTERNATE_NAMES = [
+    "Vanilla Coffee",
+    "Wanilla Coffee",
+    "Vanila Coffee",
+    "Ваниль Кофе",
+    "Ванилла Кофе",
+    "Ваниллакофе",
+    "Vanilla",
+    "Wanilla",
+]
 
 
 def build_seo(lang, table=None):
@@ -209,7 +240,8 @@ def build_jsonld(lang):
     cafe = {
         "@type": "CafeOrCoffeeShop",
         "@id": f"{SITE_URL}/#cafe",
-        "name": "Vanilla Coffee",
+        "name": "Wanilla Coffee",
+        "alternateName": BRAND_ALTERNATE_NAMES,
         "description": SEO[lang]["description"],
         "url": SITE_URL,
         "logo": f"{SITE_URL}/static/img/logo-mark.png",
@@ -255,6 +287,8 @@ def build_jsonld(lang):
             "reviewCount": "127",
         },
         "sameAs": [
+            "https://wanillacoffee.uz",
+            "https://wanillacoffee.mirolimov.uz",
             "https://www.instagram.com/vanillacoffee",
             "https://t.me/vanillacoffee",
         ],
@@ -264,7 +298,8 @@ def build_jsonld(lang):
         "@type": "WebSite",
         "@id": f"{SITE_URL}/#website",
         "url": SITE_URL,
-        "name": "Vanilla Coffee",
+        "name": "Wanilla Coffee",
+        "alternateName": BRAND_ALTERNATE_NAMES,
         "description": SEO[lang]["description"],
         "inLanguage": [lang, "ru", "uz"],
         "publisher": {"@id": f"{SITE_URL}/#cafe"},
@@ -278,12 +313,19 @@ def build_jsonld(lang):
     organization = {
         "@type": "Organization",
         "@id": f"{SITE_URL}/#organization",
-        "name": "Vanilla Coffee",
+        "name": "Wanilla Coffee",
+        "alternateName": BRAND_ALTERNATE_NAMES,
         "url": SITE_URL,
-        "logo": f"{SITE_URL}/static/img/logo-mark.png",
+        "logo": {
+            "@type": "ImageObject",
+            "url": f"{SITE_URL}/static/img/logo-mark.png",
+            "width": 512,
+            "height": 512,
+        },
         "sameAs": [
             "https://www.instagram.com/vanillacoffee",
             "https://t.me/vanillacoffee",
+            "https://wanillacoffee.uz",
         ],
     }
 
