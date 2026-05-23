@@ -20,7 +20,7 @@ const body = document.body;
 const state = {
   lang:  body.dataset.lang  || 'ru',
   table: body.dataset.table || '',
-  cat: 'all',
+  cat: body.dataset.cat || 'all',
   search: '',
   cart: JSON.parse(localStorage.getItem('vanilla_cart') || '[]'),
   categories: [],

@@ -481,12 +481,20 @@ def menu_category_page(category_id):
         site_url=SITE_URL,
         seo={
             **build_seo(lang),
-            "title": f"{section['name']} | Vanilla Coffee",
+            "title": f"{section['name']} | Wanilla Coffee",
         },
         jsonld=json.dumps(build_jsonld(lang), ensure_ascii=False),
         breadcrumb_jsonld=json.dumps(breadcrumb, ensure_ascii=False),
         canonical=f"{SITE_URL}/menu/category/{category_id}",
         section=section,
+        category_id=category_id,
+        categories=db.all_categories(),
+        products=db.all_products(),
+        initial_i18n=json.dumps(build_i18n_payload(), ensure_ascii=False),
+        initial_menu=json.dumps({
+            "categories": db.all_categories(),
+            "products": db.all_products(),
+        }, ensure_ascii=False),
     )
 
 

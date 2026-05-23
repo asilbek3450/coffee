@@ -222,6 +222,48 @@ input { font-family: inherit; }
   padding: 2rem 1.2rem 1rem;
 }
 
+/* Category page: push hero below the fixed nav */
+.menu-category-page .menu-hero {
+  padding-top: 6rem;
+}
+.menu-category-page .menu-page-shell {
+  padding-top: 0;
+}
+
+/* Compact nav variant for sub-pages */
+.nav.nav-mini {
+  background: rgba(10, 9, 8, 0.65);
+}
+
+/* Breadcrumb */
+.menu-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  flex-wrap: wrap;
+}
+.menu-breadcrumb a {
+  color: var(--text-dim);
+  transition: color 0.2s var(--ease);
+}
+.menu-breadcrumb a:hover { color: var(--accent-2); }
+.menu-breadcrumb .sep { color: var(--text-muted); opacity: 0.6; }
+.menu-breadcrumb .cur {
+  color: var(--text);
+  font-weight: 600;
+  background: var(--accent-soft);
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+}
+
+@media (max-width: 640px) {
+  .menu-category-page .menu-hero { padding-top: 5rem; }
+  .menu-breadcrumb { font-size: 0.78rem; }
+  .menu-breadcrumb .cur { padding: 0.15rem 0.5rem; }
+}
+
 .menu-topbar {
   max-width: 1240px;
   margin: 0 auto 2rem;

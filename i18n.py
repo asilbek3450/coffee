@@ -80,6 +80,7 @@ I18N = {
     "menu.page_hint": {"ru": "Нажмите, чтобы открыть", "uz": "Ochish uchun bosing"},
     "menu.back_home": {"ru": "На главную", "uz": "Bosh sahifaga"},
     "menu.items_count": {"ru": "позиций", "uz": "ta mahsulot"},
+    "menu.from":     {"ru": "от", "uz": "dan"},
 
     # Gallery
     "gal.kicker":    {"ru": "Атмосфера", "uz": "Atmosfera"},

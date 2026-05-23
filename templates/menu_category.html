@@ -9,7 +9,7 @@
 <title>{{ seo.title }}</title>
 <meta name="description" content="{{ seo.description }}" />
 <meta name="keywords" content="{{ seo.keywords }}" />
-<meta name="author" content="Vanilla Coffee · Designed by Asilbek Mirolimov" />
+<meta name="author" content="Wanilla Coffee · Designed by Asilbek Mirolimov" />
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
 <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1" />
 <link rel="canonical" href="{{ canonical }}" />
@@ -17,7 +17,7 @@
 <link rel="alternate" hreflang="uz" href="{{ canonical }}?lang=uz" />
 <link rel="alternate" hreflang="x-default" href="{{ canonical }}" />
 <meta property="og:type" content="website" />
-<meta property="og:site_name" content="Vanilla Coffee" />
+<meta property="og:site_name" content="Wanilla Coffee" />
 <meta property="og:locale" content="{{ 'ru_RU' if lang == 'ru' else 'uz_UZ' }}" />
 <meta property="og:locale:alternate" content="{{ 'uz_UZ' if lang == 'ru' else 'ru_RU' }}" />
 <meta property="og:title" content="{{ seo.title }}" />
@@ -38,13 +38,13 @@
 <link rel="apple-touch-icon" href="{{ asset_url('img/apple-touch-icon.png') }}" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;500;600;700;800&family=Pacifico&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Inter:wght@300;400;500;600;700;800&family=Pacifico&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{{ asset_url('css/styles.css') }}" />
 {% if breadcrumb_jsonld %}<script type="application/ld+json">{{ breadcrumb_jsonld|safe }}</script>{% endif %}
 <script type="application/ld+json">{{ jsonld|safe }}</script>
 </head>
-<body class="menu-page">
-<a href="#menu-main" class="skip-link">Перейти к содержимому</a>
+<body class="menu-page menu-category-page" data-table="{{ table or '' }}" data-lang="{{ lang }}" data-cat="{{ category_id }}">
+<a href="#menu-main" class="skip-link">{{ t['a11y.skip'] }}</a>
 
 <!-- Page transition overlay -->
 <div class="page-transition" id="pageTransition" aria-hidden="true">
@@ -57,63 +57,203 @@
   <div class="page-transition-bar"><i></i></div>
 </div>
 
+<!-- Language transition overlay (lang switcher uses it) -->
+<div class="lang-overlay" id="langOverlay" aria-hidden="true">
+  <div class="lang-overlay-ring"></div>
+</div>
+
 <div class="bean-field" id="beanField"></div>
+
+<!-- Top navigation (consistent with home) -->
+<nav class="nav nav-mini" id="nav">
+  <a href="{{ url_for('index', lang=lang) }}" class="nav-logo">
+    <img src="{{ asset_url('img/logo-full.png') }}" alt="Wanilla Coffee" class="brand-logo" width="1536" height="1024" />
+  </a>
+
+  <div class="nav-tools">
+    <!-- Language switcher -->
+    <div class="lang-switch" id="langSwitch">
+      <button class="lang-current" id="langCurrent" aria-label="Language">
+        <span class="lang-flag" id="langFlag">{{ '🇷🇺' if lang == 'ru' else '🇺🇿' }}</span>
+        <span class="lang-code" id="langCode">{{ lang|upper }}</span>
+        <svg class="lang-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="lang-menu" id="langMenu" aria-hidden="true">
+        <div class="lang-hint" data-i18n="lang.label">{{ t['lang.label'] }}</div>
+        <button class="lang-opt {% if lang == 'ru' %}is-current{% endif %}" data-lang="ru">
+          <span class="lang-opt-flag">🇷🇺</span>
+          <span class="lang-opt-text">Русский</span>
+        </button>
+        <button class="lang-opt {% if lang == 'uz' %}is-current{% endif %}" data-lang="uz">
+          <span class="lang-opt-flag">🇺🇿</span>
+          <span class="lang-opt-text">O‘zbek</span>
+        </button>
+      </div>
+    </div>
+
+    {% if table %}
+    <div class="table-badge">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+      <span data-i18n="nav.table">{{ t['nav.table'] }}</span> {{ table }}
+    </div>
+    {% endif %}
+
+    <button class="cart-btn" id="cartBtn" aria-label="Cart">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+      <span class="cart-count" id="cartCount">0</span>
+    </button>
+  </div>
+</nav>
 
 <header class="menu-hero">
   <nav class="menu-topbar">
-    <a href="{{ url_for('menu_page', lang=lang) }}" class="menu-back">{{ t['menu.back_home'] }}</a>
-    <a href="{{ url_for('index', lang=lang) }}" class="nav-logo">
-      <img src="{{ asset_url('img/logo-full.png') }}" alt="Wanilla Coffee" class="brand-logo" width="1536" height="1024" />
-    </a>
+    <a href="{{ url_for('menu_page', lang=lang) }}" class="menu-back">← {{ t['menu.back_home'] }}</a>
+    <div class="menu-breadcrumb" aria-label="breadcrumb">
+      <a href="{{ url_for('index', lang=lang) }}">{{ t['nav.home'] }}</a>
+      <span class="sep">/</span>
+      <a href="{{ url_for('menu_page', lang=lang) }}">{{ t['nav.menu'] }}</a>
+      <span class="sep">/</span>
+      <span class="cur">{{ section.name }}</span>
+    </div>
   </nav>
 
   <div class="menu-hero-inner">
     <span class="menu-kicker">{{ t['menu.kicker'] }}</span>
     <h1>{{ section.icon }} {{ section.name }}</h1>
-    <p>{{ section.items_count }} {{ t['menu.items_count'] }} · {{ section.min_price }} UZS</p>
+    <p>{{ section.items_count }} {{ t['menu.items_count'] }} · {{ t['menu.from'] }} {{ "{:,}".format(section.min_price).replace(",", " ") }} {{ t['curr.sum'] }}</p>
   </div>
 </header>
 
 <main class="menu-page-shell" id="menu-main">
-  <section class="menu-spotlight-grid">
-    {% for product in section.products %}
-    <article class="menu-product-tile">
-      <div class="menu-product-photo">
-        <img src="{{ product.img }}" alt="{{ product.name[lang] }}" loading="lazy" />
-      </div>
-      <div class="menu-product-copy">
-        <div class="menu-product-topline">
-          <h3>{{ product.name[lang] }}</h3>
-          {% if product.tag[lang] %}
-          <span class="menu-product-badge">{{ product.tag[lang] }}</span>
-          {% endif %}
-        </div>
-        {% if product.desc[lang] %}
-        <p>{{ product.desc[lang] }}</p>
+  <section class="menu">
+    <div class="menu-search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="search" id="menuSearch" data-i18n-attr="placeholder|menu.search" placeholder="{{ t['menu.search'] }}" />
+    </div>
+
+    <div class="menu-grid" id="menuGrid">
+      {% for product in section.products %}
+      <article class="menu-card" data-id="{{ product.id }}">
+        {% if product.tag[lang] %}
+        <span class="menu-card-badge">{{ product.tag[lang] }}</span>
         {% endif %}
-        <div class="menu-product-sizes">
-          {% for size in product.sizes %}
-          <span class="menu-product-size">
-            {{ size.label }}{% if size.kind == 'ml' %} {{ t['curr.ml'] }}{% endif %} · {{ size.price }} UZS
-          </span>
-          {% endfor %}
+        <div class="menu-card-image">
+          <img src="{{ product.img }}" alt="{{ product.name[lang] }}" loading="lazy" />
+          <button class="menu-card-eye" aria-label="{{ t['menu.details'] }}">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          </button>
         </div>
-      </div>
-    </article>
-    {% endfor %}
+        <div class="menu-card-body">
+          <h3 class="menu-card-name">{{ product.name[lang] }}</h3>
+          <p class="menu-card-desc">{{ product.desc[lang] }}</p>
+          <div class="menu-prices">
+            {% for size in product.sizes %}
+            <button class="price-pill {% if loop.first %}active{% endif %}" data-size="{{ size.label }}" data-price="{{ size.price }}">
+              <span class="size">{{ size.label }}{% if size.kind == 'ml' %} {{ t['curr.ml'] }}{% endif %}</span>
+              <span class="amount">{{ ((size.price / 1000) | int) }}k</span>
+            </button>
+            {% endfor %}
+          </div>
+          <div class="menu-card-foot">
+            <span class="selected-price">{{ "{:,}".format(product.sizes[0].price).replace(",", " ") }} {{ t['curr.sum'] }}</span>
+            <button class="add-btn" aria-label="{{ t['menu.add'] }}">+</button>
+          </div>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+
+    <div class="menu-empty" id="menuEmpty" hidden>
+      <p data-i18n="menu.empty">{{ t['menu.empty'] }}</p>
+    </div>
   </section>
 
   <footer class="footer">
     <div class="footer-inner">
-      <div class="footer-copy">{{ t['ftr.copy'] }}</div>
+      <div class="footer-copy" data-i18n="ftr.copy">{{ t['ftr.copy'] }}</div>
       <div class="footer-credit">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M14.83 14.83a4 4 0 110-5.66"/></svg>
-        <span>{{ t['ftr.designed_by'] }}</span>
+        <span data-i18n="ftr.designed_by">{{ t['ftr.designed_by'] }}</span>
         <a href="https://t.me/mirolimov_a" target="_blank" rel="noopener" class="credit-name" data-no-transition="1">Asilbek Mirolimov</a>
       </div>
     </div>
   </footer>
 </main>
+
+<!-- CART DRAWER -->
+<aside class="cart-drawer" id="cartDrawer" aria-hidden="true">
+  <div class="cart-head">
+    <h3><span data-i18n="cart.title">{{ t['cart.title'] }}</span>{% if table %}<small>· <span data-i18n="nav.table">{{ t['nav.table'] }}</span> {{ table }}</small>{% endif %}</h3>
+    <button class="cart-close" id="cartClose" aria-label="Close">✕</button>
+  </div>
+  <div class="cart-body" id="cartBody">
+    <div class="cart-empty" id="cartEmpty">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+      <p data-i18n="cart.empty">{{ t['cart.empty'] }}</p>
+      <span data-i18n="cart.empty_sub">{{ t['cart.empty_sub'] }}</span>
+    </div>
+  </div>
+  <div class="cart-foot">
+    <textarea id="cartNote" class="cart-note" data-i18n-attr="placeholder|cart.note" placeholder="{{ t['cart.note'] }}" maxlength="300"></textarea>
+    <div class="cart-total">
+      <span data-i18n="cart.total">{{ t['cart.total'] }}</span>
+      <strong id="cartTotal">0</strong>
+    </div>
+    <button class="btn btn-primary btn-full" id="checkoutBtn" disabled data-i18n="cart.checkout">{{ t['cart.checkout'] }}</button>
+  </div>
+</aside>
+<div class="cart-backdrop" id="cartBackdrop"></div>
+
+<!-- PRODUCT DETAIL MODAL -->
+<div class="modal product-modal" id="productModal" aria-hidden="true">
+  <div class="modal-card product-card">
+    <button class="modal-x" id="productClose" aria-label="Close">✕</button>
+    <div class="pm-image"><img id="pmImg" alt=""/></div>
+    <div class="pm-body">
+      <span class="pm-tag" id="pmTag" hidden></span>
+      <h3 id="pmName">—</h3>
+      <p id="pmDesc">—</p>
+
+      <div class="pm-section">
+        <div class="pm-section-title" data-i18n="menu.ingredients">{{ t['menu.ingredients'] }}</div>
+        <ul class="pm-ingredients" id="pmIngredients"></ul>
+      </div>
+
+      <div class="pm-section">
+        <div class="pm-section-title" data-i18n="menu.size">{{ t['menu.size'] }}</div>
+        <div class="pm-sizes" id="pmSizes"></div>
+      </div>
+
+      <div class="pm-foot">
+        <div class="pm-price"><span data-i18n="menu.price">{{ t['menu.price'] }}:</span> <strong id="pmPrice">—</strong></div>
+        <button class="btn btn-primary" id="pmAdd">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          <span data-i18n="menu.add">{{ t['menu.add'] }}</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Order success modal -->
+<div class="modal" id="orderModal" aria-hidden="true">
+  <div class="modal-card">
+    <div class="modal-check">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    <h3 data-i18n="ord.ok">{{ t['ord.ok'] }}</h3>
+    <p><span data-i18n="ord.num">{{ t['ord.num'] }}</span>: <strong id="orderId">—</strong></p>
+    <p class="modal-sub" id="orderEtaText">—</p>
+    <button class="btn btn-primary" id="modalClose" data-i18n="ord.great">{{ t['ord.great'] }}</button>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script id="initialI18nData" type="application/json">{{ initial_i18n|safe }}</script>
+<script id="initialMenuData" type="application/json">{{ initial_menu|safe }}</script>
 <script src="{{ asset_url('js/transition.js') }}"></script>
+<script src="{{ asset_url('js/app.js') }}"></script>
 </body>
 </html>
