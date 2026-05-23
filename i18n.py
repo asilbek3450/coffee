@@ -107,6 +107,10 @@ I18N = {
     # Footer
     "ftr.tag":       {"ru": "Speciality Coffee · Homemade Bakery · Breakfast All Day", "uz": "Speciality Coffee · Uy shirinliklari · Kun bo‘yi nonushta"},
     "ftr.copy":      {"ru": "© 2026 Vanilla Coffee. Сделано с ♥ и ароматом эспрессо.", "uz": "© 2026 Vanilla Coffee. ♥ va espresso hidi bilan tayyorlangan."},
+    "ftr.designed_by": {"ru": "Дизайн и разработка", "uz": "Dizayn va dasturlash"},
+
+    # A11y
+    "a11y.skip":     {"ru": "Перейти к содержимому", "uz": "Asosiy mazmunga o‘tish"},
 
     # Cart
     "cart.title":    {"ru": "Ваш заказ", "uz": "Buyurtmangiz"},

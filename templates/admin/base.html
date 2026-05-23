@@ -10,8 +10,20 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;500;600;700;800&family=Pacifico&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{{ asset_url('css/admin.css') }}" />
+<meta name="robots" content="noindex, nofollow" />
 </head>
 <body>
+<!-- Page transition overlay -->
+<div class="page-transition" id="pageTransition" aria-hidden="true">
+  <div class="page-transition-cup">
+    <div class="page-transition-steam"><span></span><span></span><span></span></div>
+    <div class="page-transition-cup-body"></div>
+    <div class="page-transition-cup-handle"></div>
+  </div>
+  <div class="page-transition-text">Vanilla<span>COFFEE</span></div>
+  <div class="page-transition-bar"><i></i></div>
+</div>
+
 {% block body %}
 <div class="adm-shell">
   <aside class="adm-side">
@@ -66,8 +78,18 @@
     <section class="adm-content">
       {% block content %}{% endblock %}
     </section>
+
+    <footer class="adm-footer">
+      <span>© 2026 Vanilla Coffee Admin</span>
+      <span class="adm-footer-credit">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M14.83 14.83a4 4 0 110-5.66"/></svg>
+        Designed &amp; developed by
+        <a href="https://t.me/asilbek_mirolimov" target="_blank" rel="noopener" class="credit-name" data-no-transition="1">Asilbek Mirolimov</a>
+      </span>
+    </footer>
   </main>
 </div>
 {% endblock %}
+<script src="{{ asset_url('js/transition.js') }}"></script>
 </body>
 </html>

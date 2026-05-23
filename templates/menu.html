@@ -3,21 +3,31 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
-<meta name="theme-color" content="#0a0a0a" />
+<meta name="theme-color" content="#0a0908" media="(prefers-color-scheme: dark)" />
+<meta name="theme-color" content="#ff7a18" media="(prefers-color-scheme: light)" />
+<meta name="color-scheme" content="dark light" />
 <title>{{ seo.title }}</title>
 <meta name="description" content="{{ seo.description }}" />
 <meta name="keywords" content="{{ seo.keywords }}" />
+<meta name="author" content="Vanilla Coffee · Designed by Asilbek Mirolimov" />
+<meta name="application-name" content="Vanilla Coffee" />
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+<meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1" />
 <link rel="canonical" href="{{ canonical }}" />
 <link rel="alternate" hreflang="ru" href="{{ canonical }}?lang=ru" />
 <link rel="alternate" hreflang="uz" href="{{ canonical }}?lang=uz" />
 <link rel="alternate" hreflang="x-default" href="{{ canonical }}" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Vanilla Coffee" />
+<meta property="og:locale" content="{{ 'ru_RU' if lang == 'ru' else 'uz_UZ' }}" />
+<meta property="og:locale:alternate" content="{{ 'uz_UZ' if lang == 'ru' else 'ru_RU' }}" />
 <meta property="og:title" content="{{ seo.title }}" />
 <meta property="og:description" content="{{ seo.description }}" />
 <meta property="og:url" content="{{ canonical }}" />
 <meta property="og:image" content="{{ site_url }}{{ asset_url('img/og.svg') }}" />
+<meta property="og:image:type" content="image/svg+xml" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="{{ seo.title }}" />
 <meta name="twitter:description" content="{{ seo.description }}" />
@@ -32,6 +42,19 @@
 <script type="application/ld+json">{{ jsonld|safe }}</script>
 </head>
 <body class="menu-page">
+<a href="#menu-main" class="skip-link">Перейти к содержимому</a>
+
+<!-- Page transition overlay -->
+<div class="page-transition" id="pageTransition" aria-hidden="true">
+  <div class="page-transition-cup">
+    <div class="page-transition-steam"><span></span><span></span><span></span></div>
+    <div class="page-transition-cup-body"></div>
+    <div class="page-transition-cup-handle"></div>
+  </div>
+  <div class="page-transition-text">Vanilla<span>COFFEE</span></div>
+  <div class="page-transition-bar"><i></i></div>
+</div>
+
 <div class="bean-field" id="beanField"></div>
 
 <header class="menu-hero">
@@ -49,7 +72,7 @@
   </div>
 </header>
 
-<main class="menu-page-shell">
+<main class="menu-page-shell" id="menu-main">
   <section class="menu-category-grid">
   {% for section in menu_sections %}
   <a href="{{ url_for('menu_category_page', category_id=section.id, lang=lang) }}" class="menu-category-card">
@@ -67,6 +90,18 @@
   </a>
   {% endfor %}
   </section>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-copy">{{ t['ftr.copy'] }}</div>
+      <div class="footer-credit">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M14.83 14.83a4 4 0 110-5.66"/></svg>
+        <span>{{ t['ftr.designed_by'] }}</span>
+        <a href="https://t.me/asilbek_mirolimov" target="_blank" rel="noopener" class="credit-name" data-no-transition="1">Asilbek Mirolimov</a>
+      </div>
+    </div>
+  </footer>
 </main>
+<script src="{{ asset_url('js/transition.js') }}"></script>
 </body>
 </html>

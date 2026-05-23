@@ -3,35 +3,72 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
-<meta name="theme-color" content="#0a0a0a" />
+<meta name="theme-color" content="#0a0908" media="(prefers-color-scheme: dark)" />
+<meta name="theme-color" content="#ff7a18" media="(prefers-color-scheme: light)" />
+<meta name="color-scheme" content="dark light" />
+<meta name="format-detection" content="telephone=yes" />
 <title>{{ seo.title }}</title>
 <meta name="description" content="{{ seo.description }}" />
 <meta name="keywords" content="{{ seo.keywords }}" />
+<meta name="author" content="Vanilla Coffee · Designed by Asilbek Mirolimov" />
+<meta name="application-name" content="Vanilla Coffee" />
+<meta name="apple-mobile-web-app-title" content="Vanilla Coffee" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="mobile-web-app-capable" content="yes" />
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+<meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1" />
 <link rel="canonical" href="{{ canonical }}" />
 <link rel="alternate" hreflang="ru" href="{{ canonical }}?lang=ru" />
 <link rel="alternate" hreflang="uz" href="{{ canonical }}?lang=uz" />
 <link rel="alternate" hreflang="x-default" href="{{ canonical }}" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Vanilla Coffee" />
+<meta property="og:locale" content="{{ 'ru_RU' if lang == 'ru' else 'uz_UZ' }}" />
+<meta property="og:locale:alternate" content="{{ 'uz_UZ' if lang == 'ru' else 'ru_RU' }}" />
 <meta property="og:title" content="{{ seo.title }}" />
 <meta property="og:description" content="{{ seo.description }}" />
 <meta property="og:url" content="{{ canonical }}" />
 <meta property="og:image" content="{{ site_url }}{{ asset_url('img/og.svg') }}" />
+<meta property="og:image:type" content="image/svg+xml" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="Vanilla Coffee — speciality kafe Toshkentda" />
 <meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="@vanillacoffee" />
 <meta name="twitter:title" content="{{ seo.title }}" />
 <meta name="twitter:description" content="{{ seo.description }}" />
 <meta name="twitter:image" content="{{ site_url }}{{ asset_url('img/og.svg') }}" />
+<meta name="twitter:image:alt" content="Vanilla Coffee — speciality kafe Toshkentda" />
+<meta name="geo.region" content="UZ-TK" />
+<meta name="geo.placename" content="Tashkent" />
+<meta name="geo.position" content="41.311081;69.240562" />
+<meta name="ICBM" content="41.311081, 69.240562" />
 <link rel="manifest" href="{{ asset_url('manifest.json') }}" />
 <link rel="icon" type="image/png" href="{{ asset_url('img/favicon.png') }}" />
+<link rel="icon" type="image/svg+xml" href="{{ asset_url('img/favicon.svg') }}" />
 <link rel="apple-touch-icon" href="{{ asset_url('img/apple-touch-icon.png') }}" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Inter:wght@300;400;500;600;700;800&family=Pacifico&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{{ asset_url('css/styles.css') }}" />
+<link rel="preload" as="image" href="{{ asset_url('img/logo-full.png') }}" />
 <script type="application/ld+json">{{ jsonld|safe }}</script>
 </head>
 <body data-table="{{ table or '' }}" data-lang="{{ lang }}">
+<a href="#home" class="skip-link" data-i18n="a11y.skip">Перейти к содержимому</a>
+
+<!-- Page transition overlay -->
+<div class="page-transition" id="pageTransition" aria-hidden="true">
+  <div class="page-transition-cup">
+    <div class="page-transition-steam"><span></span><span></span><span></span></div>
+    <div class="page-transition-cup-body"></div>
+    <div class="page-transition-cup-handle"></div>
+  </div>
+  <div class="page-transition-text">Vanilla<span>COFFEE</span></div>
+  <div class="page-transition-bar"><i></i></div>
+</div>
+
 <noscript>
   <section style="padding:24px;max-width:960px;margin:0 auto;">
     <h1>{{ seo.title }}</h1>
@@ -328,6 +365,11 @@
       <a href="#" aria-label="Phone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg></a>
     </div>
     <div class="footer-copy" data-i18n="ftr.copy">{{ t['ftr.copy'] }}</div>
+    <div class="footer-credit">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M14.83 14.83a4 4 0 110-5.66"/></svg>
+      <span data-i18n="ftr.designed_by">{{ t['ftr.designed_by'] }}</span>
+      <a href="https://t.me/asilbek_mirolimov" target="_blank" rel="noopener" class="credit-name" data-no-transition="1">Asilbek Mirolimov</a>
+    </div>
   </div>
 </footer>
 
@@ -404,6 +446,7 @@
 
 <script id="initialI18nData" type="application/json">{{ initial_i18n|safe }}</script>
 <script id="initialMenuData" type="application/json">{{ initial_menu|safe }}</script>
+<script src="{{ asset_url('js/transition.js') }}"></script>
 <script src="{{ asset_url('js/app.js') }}"></script>
 </body>
 </html>

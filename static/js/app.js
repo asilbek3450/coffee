@@ -70,7 +70,7 @@ function applyI18n() {
 
 // ---------- Loader hide ----------
 window.addEventListener('load', () => {
-  setTimeout(() => $('#loader')?.classList.add('hide'), 600);
+  setTimeout(() => $('#loader')?.classList.add('hide'), 300);
 });
 
 // ---------- Floating bg beans ----------

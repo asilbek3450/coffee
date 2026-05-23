@@ -3,7 +3,25 @@
     "allow": [
       "Bash(\"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome\" --headless --disable-gpu --window-size=1400,900 --screenshot=/tmp/coffee_wait.png --virtual-time-budget=30000 http://localhost:5050/)",
       "Bash(pkill -f \"python3.*app.py\")",
-      "Bash(pkill -f \"Google Chrome.*headless\")"
+      "Bash(pkill -f \"Google Chrome.*headless\")",
+      "Bash(venv/bin/python -c \"import app; print\\('Import OK'\\)\")",
+      "Bash(PORT=5051 venv/bin/python app.py)",
+      "Bash(curl -sS -o /dev/null -w \"/ -> %{http_code}\\\\n\" http://127.0.0.1:5051/)",
+      "Bash(curl -sS -o /dev/null -w \"/menu -> %{http_code}\\\\n\" http://127.0.0.1:5051/menu)",
+      "Bash(curl -sS -o /dev/null -w \"/admin/login -> %{http_code}\\\\n\" http://127.0.0.1:5051/admin/login)",
+      "Bash(curl -sS -o /dev/null -w \"/sitemap.xml -> %{http_code}\\\\n\" http://127.0.0.1:5051/sitemap.xml)",
+      "Bash(curl -sS -o /dev/null -w \"/robots.txt -> %{http_code}\\\\n\" http://127.0.0.1:5051/robots.txt)",
+      "Bash(curl -sS http://127.0.0.1:5051/)",
+      "Bash(curl -sS http://127.0.0.1:5051/menu)",
+      "Bash(curl -sS http://127.0.0.1:5051/admin/login)",
+      "Bash(curl -sS http://127.0.0.1:5051/robots.txt)",
+      "Bash(curl -sS http://127.0.0.1:5051/healthz)",
+      "Bash(curl -sS http://127.0.0.1:5051/sitemap.xml)",
+      "Bash(curl -sS -o /dev/null -w \"%{http_code}\\\\n\" \"http://127.0.0.1:5051/menu/category/hot\")",
+      "Bash(curl -sS \"http://127.0.0.1:5051/menu/category/hot\")",
+      "Bash(curl -sS -I http://127.0.0.1:5051/static/css/styles.css)",
+      "Bash(curl -sS -I http://127.0.0.1:5051/)",
+      "Bash(xargs -r kill)"
     ]
   }
 }

@@ -55,8 +55,27 @@ app.config.update(
     SESSION_COOKIE_SECURE=bool(IS_PROD),
     PREFERRED_URL_SCHEME="https" if IS_PROD else "http",
     JSON_AS_ASCII=False,
-    SEND_FILE_MAX_AGE_DEFAULT=60 * 60 * 24 * 7,  # 7d static cache
+    SEND_FILE_MAX_AGE_DEFAULT=60 * 60 * 24 * 30,  # 30d static cache (mtime busted)
 )
+
+
+# ---------- Security & cache headers ----------
+@app.after_request
+def add_security_headers(resp):
+    # Long cache for hashed/versioned static assets
+    if request.path.startswith("/static/"):
+        resp.headers.setdefault("Cache-Control", "public, max-age=2592000, immutable")
+    # SEO + security headers
+    resp.headers.setdefault("X-Content-Type-Options", "nosniff")
+    resp.headers.setdefault("X-Frame-Options", "SAMEORIGIN")
+    resp.headers.setdefault("Referrer-Policy", "strict-origin-when-cross-origin")
+    resp.headers.setdefault("Permissions-Policy", "geolocation=(), microphone=(), camera=()")
+    if IS_PROD:
+        resp.headers.setdefault(
+            "Strict-Transport-Security",
+            "max-age=31536000; includeSubDomains"
+        )
+    return resp
 
 
 @app.context_processor
@@ -151,7 +170,7 @@ def utc_now_iso():
 
 
 def build_jsonld(lang):
-    """Schema.org CafeOrCoffeeShop + Menu — helps Google rich results."""
+    """Schema.org graph: CafeOrCoffeeShop + Menu + WebSite + Organization."""
     products = db.all_products()
     cats = {c["id"]: c for c in db.all_categories()}
 
@@ -188,21 +207,33 @@ def build_jsonld(lang):
         })
 
     cafe = {
-        "@context": "https://schema.org",
         "@type": "CafeOrCoffeeShop",
+        "@id": f"{SITE_URL}/#cafe",
         "name": "Vanilla Coffee",
         "description": SEO[lang]["description"],
         "url": SITE_URL,
         "logo": f"{SITE_URL}/static/img/logo-mark.png",
-        "image": f"{SITE_URL}/static/img/og.svg",
+        "image": [
+            f"{SITE_URL}/static/img/og.svg",
+            f"{SITE_URL}/static/img/logo-full.png",
+        ],
         "telephone": "+998 90 123 45 67",
         "priceRange": "$$",
         "servesCuisine": ["Coffee", "Bakery", "Breakfast"],
+        "paymentAccepted": "Cash, Credit Card, Click, Payme",
+        "currenciesAccepted": "UZS",
         "address": {
             "@type": "PostalAddress",
             "streetAddress": "Coffee Street, 24",
             "addressLocality": "Tashkent",
+            "addressRegion": "Tashkent",
+            "postalCode": "100000",
             "addressCountry": "UZ",
+        },
+        "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": "41.311081",
+            "longitude": "69.240562",
         },
         "openingHoursSpecification": [
             {
@@ -223,8 +254,43 @@ def build_jsonld(lang):
             "ratingValue": "4.9",
             "reviewCount": "127",
         },
+        "sameAs": [
+            "https://www.instagram.com/vanillacoffee",
+            "https://t.me/vanillacoffee",
+        ],
     }
-    return cafe
+
+    website = {
+        "@type": "WebSite",
+        "@id": f"{SITE_URL}/#website",
+        "url": SITE_URL,
+        "name": "Vanilla Coffee",
+        "description": SEO[lang]["description"],
+        "inLanguage": [lang, "ru", "uz"],
+        "publisher": {"@id": f"{SITE_URL}/#cafe"},
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": f"{SITE_URL}/?q={{search_term_string}}",
+            "query-input": "required name=search_term_string",
+        },
+    }
+
+    organization = {
+        "@type": "Organization",
+        "@id": f"{SITE_URL}/#organization",
+        "name": "Vanilla Coffee",
+        "url": SITE_URL,
+        "logo": f"{SITE_URL}/static/img/logo-mark.png",
+        "sameAs": [
+            "https://www.instagram.com/vanillacoffee",
+            "https://t.me/vanillacoffee",
+        ],
+    }
+
+    return {
+        "@context": "https://schema.org",
+        "@graph": [cafe, website, organization],
+    }
 
 
 def build_menu_sections(lang):
@@ -349,6 +415,21 @@ def menu_category_page(category_id):
     if not section:
         return not_found(None)
 
+    breadcrumb = {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": 1,
+             "name": "Vanilla Coffee", "item": SITE_URL + "/"},
+            {"@type": "ListItem", "position": 2,
+             "name": ("Меню" if lang == "ru" else "Menyu"),
+             "item": f"{SITE_URL}/menu"},
+            {"@type": "ListItem", "position": 3,
+             "name": section["name"],
+             "item": f"{SITE_URL}/menu/category/{category_id}"},
+        ],
+    }
+
     return render_template(
         "menu_category.html",
         table=session.get("table"),
@@ -361,6 +442,7 @@ def menu_category_page(category_id):
             "title": f"{section['name']} | Vanilla Coffee",
         },
         jsonld=json.dumps(build_jsonld(lang), ensure_ascii=False),
+        breadcrumb_jsonld=json.dumps(breadcrumb, ensure_ascii=False),
         canonical=f"{SITE_URL}/menu/category/{category_id}",
         section=section,
     )

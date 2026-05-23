@@ -1,10 +1,16 @@
 {
-  "name": "Vanilla Coffee",
-  "short_name": "Vanilla",
-  "start_url": "/",
+  "name": "Vanilla Coffee — Speciality Café & Bakery",
+  "short_name": "Vanilla Coffee",
+  "description": "Vanilla Coffee — уютная speciality-кофейня в Ташкенте. Кофе, домашняя выпечка, авторские напитки, QR-меню.",
+  "start_url": "/?utm_source=pwa",
+  "scope": "/",
   "display": "standalone",
-  "background_color": "#0a0a0a",
-  "theme_color": "#0a0a0a",
+  "orientation": "portrait-primary",
+  "background_color": "#0a0908",
+  "theme_color": "#ff7a18",
+  "lang": "ru",
+  "dir": "ltr",
+  "categories": ["food", "lifestyle", "shopping"],
   "icons": [
     {
       "src": "/static/img/favicon.png",
@@ -16,7 +22,22 @@
       "src": "/static/img/apple-touch-icon.png",
       "sizes": "180x180",
       "type": "image/png",
-      "purpose": "any"
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/static/img/logo-mark.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Меню",
+      "short_name": "Меню",
+      "description": "Открыть QR-меню",
+      "url": "/menu",
+      "icons": [{ "src": "/static/img/favicon.png", "sizes": "64x64" }]
     }
   ]
 }
