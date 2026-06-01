@@ -13,8 +13,10 @@ venv/
 env/
 
 # Local data (use Railway Volume in production)
-# vanilla.db
+vanilla.db
 vanilla.db-journal
+vanilla.db-wal
+vanilla.db-shm
 orders.json
 
 # Editor
