@@ -764,6 +764,28 @@ def admin_orders():
     return render_template("admin/orders.html", orders=list(reversed(load_orders())))
 
 
+@app.route("/admin/reseed", methods=["POST"])
+@login_required
+def admin_reseed():
+    """Re-seed the menu DB from seed_data (categories + products + images).
+
+    WARNING: replaces the whole menu with the default seed — any products or
+    categories added/edited via admin are lost. Orders (orders.json) are kept.
+    Requires typing the confirmation word to avoid accidental wipes.
+    """
+    confirm = (request.form.get("confirm") or "").strip().upper()
+    if confirm != "RESEED":
+        flash("Для сброса введите слово RESEED")
+        return redirect(url_for("admin_dashboard"))
+    try:
+        seed.run()
+        s = db.stats()
+        flash(f"Меню пересоздано ✓ Категорий: {s['categories']}, товаров: {s['products']}")
+    except Exception as e:  # noqa: BLE001
+        flash(f"Ошибка пересоздания: {e}")
+    return redirect(url_for("admin_dashboard"))
+
+
 # ---------- categories ----------
 @app.route("/admin/categories")
 @login_required

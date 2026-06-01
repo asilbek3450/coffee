@@ -79,4 +79,24 @@
     <div class="adm-empty">Заказов пока нет</div>
   {% endif %}
 </div>
+
+<div class="adm-section">
+  <div class="adm-section-head">
+    <h2>Обслуживание меню</h2>
+  </div>
+  <div class="adm-danger">
+    <div class="adm-danger-text">
+      <strong>Пересоздать меню из шаблона</strong>
+      <p>Загружает стандартный набор категорий, товаров и актуальных изображений.
+         Внимание: текущее меню будет заменено (товары/категории, добавленные вручную,
+         удалятся). Заказы сохраняются. Для подтверждения введите слово
+         <code>RESEED</code>.</p>
+    </div>
+    <form method="post" action="{{ url_for('admin_reseed') }}" class="adm-danger-form"
+          onsubmit="return confirm('Пересоздать всё меню из шаблона? Текущие товары будут заменены.');">
+      <input type="text" name="confirm" placeholder="RESEED" autocomplete="off" class="adm-danger-input" />
+      <button type="submit" class="btn-danger-adm">Пересоздать меню</button>
+    </form>
+  </div>
+</div>
 {% endblock %}

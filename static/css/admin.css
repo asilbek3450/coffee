@@ -1017,3 +1017,38 @@ select:focus-visible {
   .size-row { grid-template-columns: 1fr 1fr; }
   .size-row .ic-btn { grid-column: 2 / 3; justify-self: end; }
 }
+
+/* ============================================
+   DANGER ZONE (re-seed)
+   ============================================ */
+.adm-danger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.2rem;
+  flex-wrap: wrap;
+  padding: 1.1rem 1.3rem;
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  border-radius: 16px;
+  background: var(--danger-soft);
+}
+.adm-danger-text { max-width: 560px; }
+.adm-danger-text strong { display: block; margin-bottom: 0.3rem; }
+.adm-danger-text p { margin: 0; font-size: 0.84rem; color: var(--text-muted); line-height: 1.5; }
+.adm-danger-text code {
+  padding: 0.05rem 0.35rem;
+  border-radius: 6px;
+  background: var(--surface);
+  font-size: 0.82rem;
+}
+.adm-danger-form { display: flex; align-items: center; gap: 0.5rem; flex-shrink: 0; }
+.adm-danger-input {
+  padding: 0.65rem 0.85rem;
+  border-radius: 100px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--text);
+  font-size: 0.85rem;
+  width: 120px;
+}
+.adm-danger-input:focus { outline: none; border-color: var(--danger); }
