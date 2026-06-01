@@ -31,7 +31,23 @@
       "Bash(curl -sS -o /dev/null -w \"/ -> %{http_code}\\\\n\" http://127.0.0.1:5053/)",
       "Bash(curl -sS -o /dev/null -w \"/menu -> %{http_code}\\\\n\" http://127.0.0.1:5053/menu)",
       "Bash(curl -sS -o /dev/null -w \"/menu/category/hot -> %{http_code}\\\\n\" http://127.0.0.1:5053/menu/category/hot)",
-      "Bash(curl -sS \"http://127.0.0.1:5053/menu/category/hot\")"
+      "Bash(curl -sS \"http://127.0.0.1:5053/menu/category/hot\")",
+      "Bash(python3 -c ' *)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" \"https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=100\")",
+      "Bash(curl -s -o /dev/null -w '%{http_code}' https://images.unsplash.com/photo-__TRACKED_VAR__?w=80)",
+      "Bash(grep -E '\\\\.db$|orders.json')",
+      "Bash(python3 -c \"import PIL; print\\('PIL', PIL.__version__\\)\")",
+      "Bash(python3 -c \"import cairosvg; print\\('cairosvg ok'\\)\")",
+      "Bash(python3 -c \"import sys; print\\(sys.executable\\)\")",
+      "Bash(python3 -)",
+      "Bash(python3 -c \"import seed; seed.run\\(\\)\")",
+      "Bash(cd /Users/asilbek/Desktop/AI-Projects/coffee *)",
+      "Read(//System/Library/Fonts/Supplemental/**)",
+      "Bash(python3 -m py_compile app.py db.py seed.py seed_data.py i18n.py)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git push *)",
+      "Bash(git commit -q -m ' *)"
     ]
   }
 }
