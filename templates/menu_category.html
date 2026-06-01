@@ -23,14 +23,13 @@
 <meta property="og:title" content="{{ seo.title }}" />
 <meta property="og:description" content="{{ seo.description }}" />
 <meta property="og:url" content="{{ canonical }}" />
-<meta property="og:image" content="{{ site_url }}{{ asset_url('img/og.svg') }}" />
-<meta property="og:image:type" content="image/svg+xml" />
-<meta property="og:image:width" content="1200" />
-<meta property="og:image:height" content="630" />
+<meta property="og:image" content="{% if section.cover.startswith('http') %}{{ section.cover }}{% else %}{{ site_url }}{{ asset_url('img/og.jpg') }}{% endif %}" />
+<meta property="og:image:alt" content="{{ section.name }} — Wanilla Coffee Toshkent" />
 <meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="@vanillacoffee" />
 <meta name="twitter:title" content="{{ seo.title }}" />
 <meta name="twitter:description" content="{{ seo.description }}" />
-<meta name="twitter:image" content="{{ site_url }}{{ asset_url('img/og.svg') }}" />
+<meta name="twitter:image" content="{% if section.cover.startswith('http') %}{{ section.cover }}{% else %}{{ site_url }}{{ asset_url('img/og.jpg') }}{% endif %}" />
 {% if google_site_verification %}<meta name="google-site-verification" content="{{ google_site_verification }}" />{% endif %}
 {% if yandex_verification %}<meta name="yandex-verification" content="{{ yandex_verification }}" />{% endif %}
 <link rel="manifest" href="{{ asset_url('manifest.json') }}" />
@@ -138,7 +137,7 @@
         <span class="menu-card-badge">{{ product.tag[lang] }}</span>
         {% endif %}
         <div class="menu-card-image">
-          <img src="{{ product.img }}" alt="{{ product.name[lang] }}" loading="lazy" />
+          <img src="{{ product.img }}" alt="{{ product.name[lang] }} — Wanilla Coffee Toshkent" width="600" height="600" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='/static/img/menu/placeholder.svg'" />
           <button class="menu-card-eye" aria-label="{{ t['menu.details'] }}">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
           </button>

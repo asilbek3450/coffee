@@ -145,13 +145,26 @@ SEO = {
             "напитки, завтраки, фреши. QR-меню, заказ со столика. Открыты с 8:00 до 23:00."
         ),
         "keywords": (
-            "Wanilla Coffee, Vanilla Coffee, Wanilla, Vanilla, Vanila, "
-            "ваниль кофе, ванилла кофе, ваниль, ванилла, ваниллакофе, "
-            "кофейня Ташкент, лучшая кофейня Ташкент, кофейня Ташкент рейтинг, "
-            "speciality coffee Tashkent, coffee shop Tashkent, кофе Ташкент, "
-            "латте Ташкент, капучино, раф, флэт уайт, фильтр кофе, эспрессо, "
-            "кофе с собой Ташкент, фреши, домашняя выпечка, круассаны, завтраки Ташкент, "
-            "QR-меню кофейня, кофейня рядом, кофейня в центре Ташкента"
+            "Wanilla Coffee, Vanilla Coffee, Wanilla, Vanilla, Vanila, Wanila, "
+            "Wanilla Coffee Ташкент, Vanilla Coffee Ташкент, Wanilla Coffee Tashkent, "
+            "ваниль кофе, ванилла кофе, ваниль, ванилла, ваниллакофе, ванила кофе, ванилакофе, "
+            "кофейня Ташкент, кофейня в Ташкенте, лучшая кофейня Ташкент, лучшая кофейня в Ташкенте, "
+            "кофейня Ташкент рейтинг, топ кофейни Ташкента, кофейни Ташкента, кофейня рядом со мной, "
+            "кофейня рядом, кофейня в центре Ташкента, уютная кофейня Ташкент, кофейня недорого Ташкент, "
+            "speciality coffee Tashkent, specialty coffee Tashkent, coffee shop Tashkent, "
+            "best coffee Tashkent, coffee Tashkent, coffee near me Tashkent, "
+            "кофе Ташкент, кофе на вынос Ташкент, кофе с собой Ташкент, кофе навынос, "
+            "купить кофе Ташкент, заказать кофе Ташкент, кофе доставка Ташкент, "
+            "латте Ташкент, капучино Ташкент, раф кофе, раф Ташкент, флэт уайт Ташкент, "
+            "американо, эспрессо, мокко, матча, матча латте, какао, горячий шоколад, "
+            "айс латте, айс кофе, холодный кофе Ташкент, фрапучино, бамбл кофе, эспрессо тоник, "
+            "чай Ташкент, фруктовый чай, ягодный чай, лимонад Ташкент, мохито безалкогольный, "
+            "молочный коктейль Ташкент, милкшейк Ташкент, орео милкшейк, "
+            "фреш Ташкент, свежевыжатый сок Ташкент, апельсиновый фреш, морковный фреш, "
+            "домашняя выпечка Ташкент, круассан Ташкент, выпечка Ташкент, десерты Ташкент, "
+            "брауни, чизкейк, маффин, макарон, завтраки Ташкент, бранч Ташкент, "
+            "где попить кофе в Ташкенте, кофейня с QR меню, QR-меню кофейня, "
+            "кафе Ташкент, кофейня Ташкент центр, кофейня Ташкент 2026"
         ),
     },
     "uz": {
@@ -164,13 +177,26 @@ SEO = {
             "ichimliklari, nonushta, freshlar. QR-menyu, stoldan buyurtma. 8:00–23:00."
         ),
         "keywords": (
-            "Wanilla Coffee, Vanilla Coffee, Wanilla, Vanilla, Vanila, "
-            "vanilla kofe, vanilla, vanila kofe, vanilla coffe, "
-            "Toshkentdagi eng yaxshi kafe, Toshkent kafe, Toshkent kofeshop, "
-            "speciality coffee Tashkent, coffee shop Tashkent, kofe Toshkent, "
-            "latte, kapuchino, raf, flat white, filtr kofe, espresso, "
-            "kofe olib ketish, fresh sharbat, uy shirinliklari, kruassan, nonushta Toshkent, "
-            "QR menyu kafe, yaqin kafe, Toshkent markazidagi kafe"
+            "Wanilla Coffee, Vanilla Coffee, Wanilla, Vanilla, Vanila, Wanila, "
+            "Wanilla Coffee Toshkent, Vanilla Coffee Toshkent, Wanilla Coffee Tashkent, "
+            "vanilla kofe, vanilla, vanila kofe, vanilla coffe, vanilla kafe, vanilakofe, "
+            "Toshkentdagi eng yaxshi kafe, Toshkentdagi eng yaxshi kofe, Toshkent kafe, "
+            "Toshkent kofeshop, Toshkentdagi kafelar, eng yaxshi qahvaxona, qahvaxona Toshkent, "
+            "kafe Toshkent, kafe yaqin atrofda, eng yaqin kafe, Toshkent markazidagi kafe, "
+            "qulay kafe Toshkent, arzon kafe Toshkent, kofe ichish joyi Toshkent, "
+            "speciality coffee Tashkent, specialty coffee Tashkent, coffee shop Tashkent, "
+            "best coffee Tashkent, kofe Toshkent, kofe Tashkent, kahva Toshkent, qahva Toshkent, "
+            "kofe olib ketish, kofe yetkazib berish Toshkent, kofe buyurtma Toshkent, "
+            "kofe sotib olish Toshkent, latte Toshkent, kapuchino Toshkent, raf kofe, raf Toshkent, "
+            "flat white, amerikano, espresso, mokko, matcha, matcha latte, kakao, issiq shokolad, "
+            "muzli latte, muzli kofe, sovuq kofe Toshkent, frapuchino, bambl kofe, espresso tonik, "
+            "choy Toshkent, mevali choy, rezavor choy, limonad Toshkent, mojito alkogolsiz, "
+            "milkshake Toshkent, sutli kokteyl Toshkent, oreo milkshake, "
+            "fresh Toshkent, tabiiy sharbat Toshkent, apelsin fresh, sabzi fresh, yangi sharbat, "
+            "uy shirinliklari Toshkent, kruassan Toshkent, shirinliklar Toshkent, desert Toshkent, "
+            "brauni, chizkeyk, maffin, makaron, nonushta Toshkent, brunch Toshkent, "
+            "Toshkentda qayerda kofe ichish mumkin, QR menyu kafe, QR-menyu, "
+            "kafe Toshkent markaz, kafe Toshkent 2026"
         ),
     },
 }
@@ -246,7 +272,7 @@ def build_jsonld(lang):
         "url": SITE_URL,
         "logo": f"{SITE_URL}/static/img/logo-mark.png",
         "image": [
-            f"{SITE_URL}/static/img/og.svg",
+            f"{SITE_URL}/static/img/og.jpg",
             f"{SITE_URL}/static/img/logo-full.png",
         ],
         "telephone": "+998 90 123 45 67",
@@ -329,9 +355,51 @@ def build_jsonld(lang):
         ],
     }
 
+    faq_items = {
+        "ru": [
+            ("Где находится Wanilla Coffee в Ташкенте?",
+             "Wanilla Coffee (Vanilla Coffee) находится в центре Ташкента. "
+             "Мы открыты ежедневно с 8:00 до 23:00 — заходите за кофе, фрешами и домашней выпечкой."),
+            ("Какой кофе можно заказать?",
+             "В меню эспрессо, американо, капучино, латте, флэт уайт, раф, мокко, матча, "
+             "а также холодный кофе: айс латте, фрапучино, бамбл и эспрессо тоник."),
+            ("Есть ли QR-меню и заказ со столика?",
+             "Да, у нас есть интерактивное QR-меню на русском и узбекском языках — "
+             "можно посмотреть весь ассортимент и оформить заказ прямо со столика."),
+            ("Есть ли выпечка и десерты?",
+             "Да — круассаны, брауни, маффины, макароны, пироги и другая свежая домашняя выпечка каждый день."),
+        ],
+        "uz": [
+            ("Wanilla Coffee Toshkentning qayerida joylashgan?",
+             "Wanilla Coffee (Vanilla Coffee) Toshkent markazida joylashgan. "
+             "Har kuni 8:00 dan 23:00 gacha ochiqmiz — kofe, fresh va uy shirinliklari uchun keling."),
+            ("Qanday kofe buyurtma qilish mumkin?",
+             "Menyuda espresso, amerikano, kapuchino, latte, flat white, raf, mokko, matcha, "
+             "shuningdek sovuq kofe: muzli latte, frapuchino, bambl va espresso tonik bor."),
+            ("QR-menyu va stoldan buyurtma bormi?",
+             "Ha, bizda rus va o‘zbek tilidagi interaktiv QR-menyu bor — "
+             "butun assortimentni ko‘rib, to‘g‘ridan-to‘g‘ri stoldan buyurtma berishingiz mumkin."),
+            ("Shirinlik va desertlar bormi?",
+             "Ha — kruassan, brauni, maffin, makaron, piroglar va har kuni yangi uy shirinliklari."),
+        ],
+    }
+    faq = {
+        "@type": "FAQPage",
+        "@id": f"{SITE_URL}/#faq",
+        "inLanguage": lang,
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": q,
+                "acceptedAnswer": {"@type": "Answer", "text": a},
+            }
+            for q, a in faq_items.get(lang, faq_items["ru"])
+        ],
+    }
+
     return {
         "@context": "https://schema.org",
-        "@graph": [cafe, website, organization],
+        "@graph": [cafe, website, organization, faq],
     }
 
 
@@ -345,17 +413,18 @@ def build_menu_sections(lang):
         if not items:
             continue
 
-        min_price = min(
+        prices = [
             size["price"]
             for item in items
             for size in item.get("sizes", [])
-        )
+        ]
+        min_price = min(prices) if prices else 0
 
         grouped.append({
             "id": category["id"],
             "name": category["name"].get(lang, category["name"]["ru"]),
             "icon": category.get("icon", ""),
-            "cover": items[0].get("img") or "/static/img/og.svg",
+            "cover": items[0].get("img") or f"{SITE_URL}/static/img/og.jpg",
             "items_count": len(items),
             "min_price": min_price,
             "products": items,
@@ -584,10 +653,16 @@ def sitemap():
     now = datetime.now(timezone.utc).strftime("%Y-%m-%d")
     urls = []
 
-    def add(loc):
+    def esc(s):
+        return (str(s).replace("&", "&amp;").replace("<", "&lt;")
+                .replace(">", "&gt;").replace('"', "&quot;"))
+
+    def add(loc, priority="0.8", images=None):
         urls.append({
             "loc": loc,
             "lastmod": now,
+            "priority": priority,
+            "images": images or [],
             "alternates": [
                 {"hreflang": "ru", "href": loc + ("&" if "?" in loc else "?") + "lang=ru"},
                 {"hreflang": "uz", "href": loc + ("&" if "?" in loc else "?") + "lang=uz"},
@@ -595,25 +670,39 @@ def sitemap():
             ],
         })
 
-    add(f"{SITE_URL}/")
-    add(f"{SITE_URL}/menu")
+    products = db.all_products()
+    add(f"{SITE_URL}/", priority="1.0")
+    add(f"{SITE_URL}/menu", priority="0.9")
     for category in db.all_categories():
-        add(f"{SITE_URL}/menu/category/{category['id']}")
+        # Attach product images for this category so Google can index them (Image SEO)
+        imgs = [
+            {"loc": p["img"], "title": p["name"].get("ru", "")}
+            for p in products
+            if p["category_id"] == category["id"] and (p["img"] or "").startswith("http")
+        ][:20]
+        add(f"{SITE_URL}/menu/category/{category['id']}", priority="0.8", images=imgs)
     # Include a handful of table pages (extend as needed)
     for n in range(1, 21):
-        add(f"{SITE_URL}/table/{n}")
+        add(f"{SITE_URL}/table/{n}", priority="0.5")
 
     xml = ['<?xml version="1.0" encoding="UTF-8"?>',
            '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"',
-           '        xmlns:xhtml="http://www.w3.org/1999/xhtml">']
+           '        xmlns:xhtml="http://www.w3.org/1999/xhtml"',
+           '        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">']
     for u in urls:
         xml.append("  <url>")
-        xml.append(f"    <loc>{u['loc']}</loc>")
+        xml.append(f"    <loc>{esc(u['loc'])}</loc>")
         xml.append(f"    <lastmod>{u['lastmod']}</lastmod>")
         xml.append("    <changefreq>weekly</changefreq>")
-        xml.append("    <priority>0.8</priority>")
+        xml.append(f"    <priority>{u['priority']}</priority>")
         for a in u["alternates"]:
-            xml.append(f'    <xhtml:link rel="alternate" hreflang="{a["hreflang"]}" href="{a["href"]}"/>')
+            xml.append(f'    <xhtml:link rel="alternate" hreflang="{a["hreflang"]}" href="{esc(a["href"])}"/>')
+        for im in u["images"]:
+            xml.append("    <image:image>")
+            xml.append(f"      <image:loc>{esc(im['loc'])}</image:loc>")
+            if im.get("title"):
+                xml.append(f"      <image:title>{esc(im['title'])}</image:title>")
+            xml.append("    </image:image>")
         xml.append("  </url>")
     xml.append("</urlset>")
 
