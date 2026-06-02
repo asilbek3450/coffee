@@ -47,7 +47,7 @@ PRODUCTS = [
         "ingredients_ru": ["Двойной эспрессо", "Паровое молоко", "Тонкая молочная пенка"],
         "ingredients_uz": ["Ikki shot espresso", "Bug‘langan sut", "Yupqa sut ko‘pigi"],
         "tag_ru": "Хит", "tag_uz": "Hit",
-        "img": "https://images.unsplash.com/photo-1517701604599-bb29b565090c?w=600&h=600&fit=crop&crop=entropy&auto=format&q=75",
+        "img": "/static/img/menu/flat-white.jpg",
         "sizes": [ml(250, 30000), ml(350, 35000)],
     },
     {
@@ -77,7 +77,7 @@ PRODUCTS = [
         "desc_uz": "Espresso, sut va tabiiy shokolad",
         "ingredients_ru": ["Эспрессо", "Молоко", "Шоколадный сироп", "Какао пудра"],
         "ingredients_uz": ["Espresso", "Sut", "Shokolad siropi", "Kakao kukuni"],
-        "img": "https://images.unsplash.com/photo-1578374173705-969cbe6f2d6b?w=600&h=600&fit=crop&crop=entropy&auto=format&q=75",
+        "img": "/static/img/menu/mocha.jpg",
         "sizes": [ml(250, 32000), ml(350, 35000)],
     },
     {
@@ -172,7 +172,7 @@ PRODUCTS = [
         "ingredients_ru": ["Эспрессо", "Молоко", "Лёд", "Сироп", "Взбитые сливки"],
         "ingredients_uz": ["Espresso", "Sut", "Muz", "Sirop", "Ko‘pirtirilgan qaymoq"],
         "tag_ru": "Хит", "tag_uz": "Hit",
-        "img": "https://images.unsplash.com/photo-1481833761820-0509d3217039?w=600&h=600&fit=crop&crop=entropy&auto=format&q=75",
+        "img": "/static/img/menu/frappuccino.jpg",
         "sizes": [ml(450, 40000), ml(600, 45000)],
     },
     {
@@ -182,7 +182,7 @@ PRODUCTS = [
         "desc_uz": "Kofe, apelsin sharbati va muz — yangi miks",
         "ingredients_ru": ["Эспрессо", "Апельсиновый сок", "Лёд"],
         "ingredients_uz": ["Espresso", "Apelsin sharbati", "Muz"],
-        "img": "https://images.unsplash.com/photo-1497636577773-f1231844b336?w=600&h=600&fit=crop&crop=entropy&auto=format&q=75",
+        "img": "/static/img/menu/bumble.jpg",
         "sizes": [ml(450, 35000), ml(600, 40000)],
     },
     {
@@ -193,7 +193,7 @@ PRODUCTS = [
         "ingredients_ru": ["Эспрессо", "Свежевыжатый апельсин", "Лёд"],
         "ingredients_uz": ["Espresso", "Yangi siqilgan apelsin", "Muz"],
         "tag_ru": "Premium", "tag_uz": "Premium",
-        "img": "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=600&h=600&fit=crop&crop=entropy&auto=format&q=75",
+        "img": "/static/img/menu/bumble-fresh.jpg",
         "sizes": [ml(450, 60000), ml(600, 70000)],
     },
     {
@@ -203,7 +203,7 @@ PRODUCTS = [
         "desc_uz": "Espresso tonik bilan — yangicha taravat",
         "ingredients_ru": ["Эспрессо", "Тоник", "Лёд", "Лайм"],
         "ingredients_uz": ["Espresso", "Tonik", "Muz", "Layim"],
-        "img": "https://images.unsplash.com/photo-1485808191679-5f86510681a2?w=600&h=600&fit=crop&crop=entropy&auto=format&q=75",
+        "img": "/static/img/menu/espresso-tonic.jpg",
         "sizes": [ml(450, 35000), ml(600, 40000)],
     },
     {
@@ -236,7 +236,7 @@ PRODUCTS = [
         "desc_uz": "Osiyo uslubidagi sutli iliq choy",
         "ingredients_ru": ["Чёрный чай", "Молоко", "Сахар"],
         "ingredients_uz": ["Qora choy", "Sut", "Shakar"],
-        "img": "https://images.unsplash.com/photo-1597481499750-3e6b22637e12?w=600&h=600&fit=crop&crop=entropy&auto=format&q=75",
+        "img": "/static/img/menu/tea-milk.jpg",
         "sizes": [ml(450, 20000), ml(600, 25000)],
     },
     {
@@ -286,7 +286,7 @@ PRODUCTS = [
         "desc_uz": "Sersuv malinali xushbo‘y choy",
         "ingredients_ru": ["Чай", "Малина", "Мята", "Сахар"],
         "ingredients_uz": ["Choy", "Malina", "Yalpiz", "Shakar"],
-        "img": "https://images.unsplash.com/photo-1563911892437-1feda0179e1b?w=600&h=600&fit=crop&crop=entropy&auto=format&q=75",
+        "img": "/static/img/menu/tea-raspberry.jpg",
         "sizes": [ml(450, 30000), ml(600, 35000)],
     },
 
@@ -362,7 +362,7 @@ PRODUCTS = [
         "ingredients_ru": ["Мороженое", "Молоко", "Шоколадный сироп", "Карамель", "Арахис"],
         "ingredients_uz": ["Muzqaymoq", "Sut", "Shokolad siropi", "Karamel", "Yeryong‘oq"],
         "tag_ru": "Хит", "tag_uz": "Hit",
-        "img": "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600&h=600&fit=crop&crop=entropy&auto=format&q=75",
+        "img": "/static/img/menu/snickers-shake.jpg",
         "sizes": [ml(450, 40000), ml(600, 45000)],
     },
     {
@@ -372,7 +372,7 @@ PRODUCTS = [
         "desc_uz": "Kokosli tropik milkshake",
         "ingredients_ru": ["Мороженое", "Молоко", "Кокосовая стружка", "Кокосовый сироп"],
         "ingredients_uz": ["Muzqaymoq", "Sut", "Kokos qirindisi", "Kokos siropi"],
-        "img": "https://images.unsplash.com/photo-1502741126161-b048400d085d?w=600&h=600&fit=crop&crop=entropy&auto=format&q=75",
+        "img": "/static/img/menu/coconut-shake.jpg",
         "sizes": [ml(450, 40000), ml(600, 45000)],
     },
     {
@@ -382,7 +382,7 @@ PRODUCTS = [
         "desc_uz": "O‘rmon mevalari bilan sutli kokteyl",
         "ingredients_ru": ["Мороженое", "Молоко", "Лесные ягоды", "Сахар"],
         "ingredients_uz": ["Muzqaymoq", "Sut", "O‘rmon mevalari", "Shakar"],
-        "img": "https://images.unsplash.com/photo-1553787499-6f9133860278?w=600&h=600&fit=crop&crop=entropy&auto=format&q=75",
+        "img": "/static/img/menu/berry-shake.jpg",
         "sizes": [ml(450, 40000), ml(600, 45000)],
     },
     {
@@ -413,7 +413,7 @@ PRODUCTS = [
         "desc_uz": "Shirinlik ishqibozlari uchun quyuq shokoladli shake",
         "ingredients_ru": ["Мороженое", "Молоко", "Шоколад", "Какао"],
         "ingredients_uz": ["Muzqaymoq", "Sut", "Shokolad", "Kakao"],
-        "img": "https://images.unsplash.com/photo-1583251633146-d0c6c036187d?w=600&h=600&fit=crop&crop=entropy&auto=format&q=75",
+        "img": "/static/img/menu/choc-shake.jpg",
         "sizes": [ml(450, 40000), ml(600, 45000)],
     },
 
@@ -425,7 +425,7 @@ PRODUCTS = [
         "desc_uz": "Yangi siqilgan olma sharbati",
         "ingredients_ru": ["100% свежее яблоко"],
         "ingredients_uz": ["100% yangi olma"],
-        "img": "https://images.unsplash.com/photo-1576673442511-7e39b6545c87?w=600&h=600&fit=crop&crop=entropy&auto=format&q=75",
+        "img": "/static/img/menu/fresh-apple.jpg",
         "sizes": [ml(450, 35000), ml(600, 45000)],
     },
     {
@@ -435,7 +435,7 @@ PRODUCTS = [
         "desc_uz": "Shirin sabzi freshi — teri uchun vitamin",
         "ingredients_ru": ["100% свежая морковь"],
         "ingredients_uz": ["100% yangi sabzi"],
-        "img": "https://images.unsplash.com/photo-1622597467836-f3285f2131b8?w=600&h=600&fit=crop&crop=entropy&auto=format&q=75",
+        "img": "/static/img/menu/fresh-carrot.jpg",
         "sizes": [ml(450, 30000), ml(600, 45000)],
     },
     {
@@ -466,7 +466,7 @@ PRODUCTS = [
         "desc_uz": "Yengil va muvozanatli miks",
         "ingredients_ru": ["Яблоко", "Морковь"],
         "ingredients_uz": ["Olma", "Sabzi"],
-        "img": "https://images.unsplash.com/photo-1610970881699-44a5587cabec?w=600&h=600&fit=crop&crop=entropy&auto=format&q=75",
+        "img": "/static/img/menu/fresh-apple-carrot.jpg",
         "sizes": [ml(450, 45000), ml(600, 55000)],
     },
     {
@@ -476,7 +476,7 @@ PRODUCTS = [
         "desc_uz": "Tetiklantiruvchi sitrus miksi",
         "ingredients_ru": ["Яблоко", "Апельсин"],
         "ingredients_uz": ["Olma", "Apelsin"],
-        "img": "https://images.unsplash.com/photo-1638176066666-ffb2f013c7dd?w=600&h=600&fit=crop&crop=entropy&auto=format&q=75",
+        "img": "/static/img/menu/fresh-apple-orange.jpg",
         "sizes": [ml(450, 60000), ml(600, 75000)],
     },
     {
@@ -487,7 +487,7 @@ PRODUCTS = [
         "ingredients_ru": ["Яблоко", "Морковь", "Апельсин"],
         "ingredients_uz": ["Olma", "Sabzi", "Apelsin"],
         "tag_ru": "Mix", "tag_uz": "Miks",
-        "img": "https://images.unsplash.com/photo-1600718374662-0483d2b9da44?w=600&h=600&fit=crop&crop=entropy&auto=format&q=75",
+        "img": "/static/img/menu/fresh-mix.jpg",
         "sizes": [ml(450, 55000), ml(600, 75000)],
     },
 
@@ -560,7 +560,7 @@ PRODUCTS = [
         "desc_uz": "Shokolad bo‘laklari bilan qarsillaydigan pechene",
         "ingredients_ru": ["Мука", "Сливочное масло", "Тёмный шоколад", "Сахар"],
         "ingredients_uz": ["Un", "Sariyog‘", "Tund shokolad", "Shakar"],
-        "img": "https://images.unsplash.com/photo-1558857563-b371033873b8?w=600&h=600&fit=crop&crop=entropy&auto=format&q=75",
+        "img": "/static/img/menu/choc-cookies.jpg",
         "sizes": [pc("1 шт / 1 dona", 28000)],
     },
     {
@@ -570,7 +570,7 @@ PRODUCTS = [
         "desc_uz": "Klassik sovet deserti",
         "ingredients_ru": ["Песочное тесто", "Варёная сгущёнка", "Сливочное масло"],
         "ingredients_uz": ["Qum xamir", "Qaynatilgan quyultirilgan sut", "Sariyog‘"],
-        "img": "https://images.unsplash.com/photo-1612203985729-70726954388c?w=600&h=600&fit=crop&crop=entropy&auto=format&q=75",
+        "img": "/static/img/menu/nuts-condensed.jpg",
         "sizes": [pc("1 шт / 1 dona", 28000)],
     },
     {

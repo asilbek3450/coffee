@@ -47,7 +47,11 @@
       "Bash(git add *)",
       "Bash(git commit -m ' *)",
       "Bash(git push *)",
-      "Bash(git commit -q -m ' *)"
+      "Bash(git commit -q -m ' *)",
+      "Bash(grep -iE '\\\\.db\\($|-\\)')",
+      "Bash(git ls-tree *)",
+      "Bash(git rm *)",
+      "Bash(awk '{print $5, $9}')"
     ]
   }
 }
