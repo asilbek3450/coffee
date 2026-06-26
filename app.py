@@ -16,7 +16,6 @@ import uuid
 import db
 import seed
 from i18n import I18N, dict_for
-
 # ---------- ENV / CONFIG ----------
 IS_PROD = os.environ.get("RAILWAY_ENVIRONMENT") or os.environ.get("FLASK_ENV") == "production"
 
